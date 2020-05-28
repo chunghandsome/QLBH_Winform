@@ -1,0 +1,14 @@
+C:\Users\Chung Dep Trai\Desktop\QLBH\QLBH\QLBH\bin\Debug\QLBH.exe.config
+C:\Users\Chung Dep Trai\Desktop\QLBH\QLBH\QLBH\bin\Debug\QLBH.exe
+C:\Users\Chung Dep Trai\Desktop\QLBH\QLBH\QLBH\bin\Debug\QLBH.pdb
+C:\Users\Chung Dep Trai\Desktop\QLBH\QLBH\QLBH\obj\Debug\QLBH.csprojResolveAssemblyReference.cache
+C:\Users\Chung Dep Trai\Desktop\QLBH\QLBH\QLBH\obj\Debug\QLBH.Properties.Resources.resources
+C:\Users\Chung Dep Trai\Desktop\QLBH\QLBH\QLBH\obj\Debug\QLBH.csproj.GenerateResource.Cache
+C:\Users\Chung Dep Trai\Desktop\QLBH\QLBH\QLBH\obj\Debug\QLBH.exe
+C:\Users\Chung Dep Trai\Desktop\QLBH\QLBH\QLBH\obj\Debug\QLBH.pdb
+C:\Users\Chung Dep Trai\Desktop\QLBH\QLBH\QLBH\bin\Debug\EntityFramework.dll
+C:\Users\Chung Dep Trai\Desktop\QLBH\QLBH\QLBH\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Chung Dep Trai\Desktop\QLBH\QLBH\QLBH\bin\Debug\EntityFramework.xml
+C:\Users\Chung Dep Trai\Desktop\QLBH\QLBH\QLBH\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Chung Dep Trai\Desktop\QLBH\QLBH\QLBH\obj\Debug\QLBH.Form1.resources
+C:\Users\Chung Dep Trai\Desktop\QLBH\QLBH\QLBH\obj\Debug\QLBH.frmAttrbute.resources

@@ -1,6 +1,6 @@
 ﻿namespace QLBH
 {
-    partial class frmAttrbute
+    partial class FrmCategory
     {
         /// <summary>
         /// Required designer variable.
@@ -28,35 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label6 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnName = new System.Windows.Forms.Label();
-            this.btnPassword = new System.Windows.Forms.Label();
-            this.txtType = new System.Windows.Forms.TextBox();
-            this.txtValue = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnOut = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.text = new System.Windows.Forms.Label();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.listCate = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel3.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.listCate)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(35, 282);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(774, 255);
-            this.dataGridView1.TabIndex = 11;
             // 
             // tableLayoutPanel3
             // 
@@ -70,86 +57,24 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
             this.tableLayoutPanel3.Controls.Add(this.label6, 2, 0);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(35, 35);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(21, 32);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(774, 70);
-            this.tableLayoutPanel3.TabIndex = 22;
+            this.tableLayoutPanel3.TabIndex = 23;
             // 
             // label6
             // 
             this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Times New Roman", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(236, 15);
+            this.label6.Location = new System.Drawing.Point(239, 15);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(299, 40);
+            this.label6.Size = new System.Drawing.Size(292, 40);
             this.label6.TabIndex = 0;
-            this.label6.Text = "Quản lý thuộc tính";
+            this.label6.Text = "Quản lý danh mục";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.ColumnCount = 4;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel1.Controls.Add(this.btnName, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnPassword, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.txtType, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.txtValue, 3, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(35, 133);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(774, 38);
-            this.tableLayoutPanel1.TabIndex = 23;
-            // 
-            // btnName
-            // 
-            this.btnName.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btnName.AutoSize = true;
-            this.btnName.Location = new System.Drawing.Point(3, 12);
-            this.btnName.Name = "btnName";
-            this.btnName.Size = new System.Drawing.Size(31, 13);
-            this.btnName.TabIndex = 0;
-            this.btnName.Text = "Type";
-            // 
-            // btnPassword
-            // 
-            this.btnPassword.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btnPassword.AutoSize = true;
-            this.btnPassword.Location = new System.Drawing.Point(389, 12);
-            this.btnPassword.Name = "btnPassword";
-            this.btnPassword.Size = new System.Drawing.Size(34, 13);
-            this.btnPassword.TabIndex = 0;
-            this.btnPassword.Text = "Value";
-            // 
-            // txtType
-            // 
-            this.txtType.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtType.Location = new System.Drawing.Point(80, 3);
-            this.txtType.Multiline = true;
-            this.txtType.Name = "txtType";
-            this.txtType.Size = new System.Drawing.Size(303, 32);
-            this.txtType.TabIndex = 1;
-            // 
-            // txtValue
-            // 
-            this.txtValue.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtValue.Location = new System.Drawing.Point(466, 3);
-            this.txtValue.Multiline = true;
-            this.txtValue.Name = "txtValue";
-            this.txtValue.Size = new System.Drawing.Size(305, 32);
-            this.txtValue.TabIndex = 1;
             // 
             // tableLayoutPanel4
             // 
@@ -166,12 +91,12 @@
             this.tableLayoutPanel4.Controls.Add(this.btnOut, 3, 0);
             this.tableLayoutPanel4.Controls.Add(this.button2, 2, 0);
             this.tableLayoutPanel4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(35, 201);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(21, 196);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(774, 54);
-            this.tableLayoutPanel4.TabIndex = 24;
+            this.tableLayoutPanel4.TabIndex = 25;
             // 
             // button1
             // 
@@ -213,41 +138,90 @@
             this.button2.Text = "Xóa";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // frmAttrbute
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Controls.Add(this.text, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.txtName, 1, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(21, 129);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(774, 38);
+            this.tableLayoutPanel1.TabIndex = 26;
+            // 
+            // text
+            // 
+            this.text.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.text.AutoSize = true;
+            this.text.Location = new System.Drawing.Point(3, 12);
+            this.text.Name = "text";
+            this.text.Size = new System.Drawing.Size(76, 13);
+            this.text.TabIndex = 0;
+            this.text.Text = "Tên danh mục";
+            // 
+            // txtName
+            // 
+            this.txtName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtName.Location = new System.Drawing.Point(157, 3);
+            this.txtName.Multiline = true;
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(303, 32);
+            this.txtName.TabIndex = 1;
+            // 
+            // listCate
+            // 
+            this.listCate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listCate.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.listCate.GridColor = System.Drawing.SystemColors.ButtonFace;
+            this.listCate.Location = new System.Drawing.Point(21, 278);
+            this.listCate.Name = "listCate";
+            this.listCate.Size = new System.Drawing.Size(774, 225);
+            this.listCate.TabIndex = 27;
+            // 
+            // FrmCategory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(843, 578);
-            this.Controls.Add(this.tableLayoutPanel4);
+            this.ClientSize = new System.Drawing.Size(820, 532);
+            this.Controls.Add(this.listCate);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.tableLayoutPanel4);
             this.Controls.Add(this.tableLayoutPanel3);
-            this.Controls.Add(this.dataGridView1);
-            this.Name = "frmAttrbute";
-            this.Text = "Quản lý thuộc tính";
-            this.Load += new System.EventHandler(this.frmAttrbute_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Name = "FrmCategory";
+            this.Text = "FrmCategory";
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
+            this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.tableLayoutPanel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.listCate)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.DataGridView dataGridView1;
+
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label btnName;
-        private System.Windows.Forms.Label btnPassword;
-        private System.Windows.Forms.TextBox txtType;
-        private System.Windows.Forms.TextBox txtValue;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnOut;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Label text;
+        private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.DataGridView listCate;
     }
 }

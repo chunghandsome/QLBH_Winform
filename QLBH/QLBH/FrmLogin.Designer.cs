@@ -1,6 +1,6 @@
 ﻿namespace QLBH
 {
-    partial class Form1
+    partial class FrmLogin
     {
         /// <summary>
         /// Required designer variable.
@@ -56,6 +56,7 @@
             this.btnExit.TabIndex = 8;
             this.btnExit.Text = "Thoát";
             this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // button1
             // 
@@ -94,7 +95,7 @@
             this.listAccount.Size = new System.Drawing.Size(208, 21);
             this.listAccount.TabIndex = 10;
             // 
-            // Form1
+            // FrmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -105,7 +106,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.pass);
             this.Controls.Add(this.tk);
-            this.Name = "Form1";
+            this.Name = "FrmLogin";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);

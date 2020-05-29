@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace QLBH
 {
-    public partial class Form1 : Form
+    public partial class FrmLogin : Form
     {
         QLBHModel db = new QLBHModel();
-        public Form1()
+        public FrmLogin()
         {
             InitializeComponent();
         }
@@ -22,7 +22,10 @@ namespace QLBH
             var result = db.Users.Where(x => x.email == email && x.password == password).SingleOrDefault();
             if (result != null)
             {
-                MessageBox.Show("Đã vào");
+                FrmMain m = new FrmMain();
+                this.Hide();
+                m.ShowDialog();
+                this.Show();
             }
             else
             {
@@ -38,10 +41,12 @@ namespace QLBH
 
         private void button1_Click(object sender, EventArgs e)
         {
-            frmAttrbute f = new frmAttrbute();
-            this.Hide();
-            f.ShowDialog();
-            this.Show();
+            Login(tk.Text, pass.Text);
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

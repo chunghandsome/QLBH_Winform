@@ -10,5 +10,10 @@ C:\Users\Chung Dep Trai\Desktop\QLBH\QLBH\QLBH\bin\Debug\EntityFramework.dll
 C:\Users\Chung Dep Trai\Desktop\QLBH\QLBH\QLBH\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Chung Dep Trai\Desktop\QLBH\QLBH\QLBH\bin\Debug\EntityFramework.xml
 C:\Users\Chung Dep Trai\Desktop\QLBH\QLBH\QLBH\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\Chung Dep Trai\Desktop\QLBH\QLBH\QLBH\obj\Debug\QLBH.Form1.resources
 C:\Users\Chung Dep Trai\Desktop\QLBH\QLBH\QLBH\obj\Debug\QLBH.frmAttrbute.resources
+C:\Users\Chung Dep Trai\Desktop\QLBH\QLBH\QLBH\obj\Debug\QLBH.FrmLogin.resources
+C:\Users\Chung Dep Trai\Desktop\QLBH\QLBH\QLBH\obj\Debug\QLBH.FrmMain.resources
+C:\Users\Chung Dep Trai\Desktop\QLBH\QLBH\QLBH\obj\Debug\QLBH.FrmProduct.resources
+C:\Users\Chung Dep Trai\Desktop\QLBH\QLBH\QLBH\obj\Debug\QLBH.FrmAccount.resources
+C:\Users\Chung Dep Trai\Desktop\QLBH\QLBH\QLBH\obj\Debug\QLBH.FrmCategory.resources
+C:\Users\Chung Dep Trai\Desktop\QLBH\QLBH\QLBH\obj\Debug\QLBH.FrmOrder.resources

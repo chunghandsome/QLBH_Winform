@@ -16,5 +16,10 @@ namespace QLBH
         {
             InitializeComponent();
         }
+
+        private void btnOut_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

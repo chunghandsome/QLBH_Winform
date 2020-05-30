@@ -75,6 +75,7 @@
             this.pass.Location = new System.Drawing.Point(248, 184);
             this.pass.Multiline = true;
             this.pass.Name = "pass";
+            this.pass.PasswordChar = '*';
             this.pass.Size = new System.Drawing.Size(238, 43);
             this.pass.TabIndex = 6;
             // 
@@ -94,9 +95,11 @@
             this.listAccount.Name = "listAccount";
             this.listAccount.Size = new System.Drawing.Size(208, 21);
             this.listAccount.TabIndex = 10;
+            this.listAccount.SelectedIndexChanged += new System.EventHandler(this.listAccount_SelectedIndexChanged);
             // 
             // FrmLogin
             // 
+            this.AcceptButton = this.button1;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(592, 323);

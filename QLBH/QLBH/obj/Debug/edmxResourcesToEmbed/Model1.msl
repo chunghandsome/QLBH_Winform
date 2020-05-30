@@ -78,5 +78,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="createAttr" FunctionName="QLBHModels.Store.createAttr" />
   </EntityContainerMapping>
 </Mapping>

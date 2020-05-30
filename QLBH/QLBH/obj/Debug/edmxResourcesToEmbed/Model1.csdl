@@ -119,6 +119,10 @@
       <End Role="Product" EntitySet="Products" />
     </AssociationSet>
     <FunctionImport Name="selectProduct" ReturnType="Collection(QLBHModels.selectProduct_Result)" />
+    <FunctionImport Name="createAttr">
+      <Parameter Name="type" Mode="In" Type="Int32" />
+      <Parameter Name="value" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="selectProduct_Result">
     <Property Type="Int32" Name="id" Nullable="false" />

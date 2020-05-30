@@ -5,8 +5,8 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="de54f8afdaea409da7c117c9e531b786" Name="Diagram1">
-        <EntityTypeShape EntityType="QLBHModels.Attribute" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLBHModels.Bill" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBHModels.Attribute" Width="1.5" PointX="7" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBHModels.Bill" Width="1.5" PointX="1.125" PointY="4.5" IsExpanded="true" />
         <EntityTypeShape EntityType="QLBHModels.BillDetail" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="QLBHModels.Category" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="QLBHModels.Product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />

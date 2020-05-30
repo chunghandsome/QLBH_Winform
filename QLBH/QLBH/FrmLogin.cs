@@ -29,7 +29,7 @@ namespace QLBH
             }
             else
             {
-                MessageBox.Show("Lỗi");
+                MessageBox.Show("Đăng nhập không thành công", "Error", MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
         }
 
@@ -47,6 +47,11 @@ namespace QLBH
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void listAccount_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

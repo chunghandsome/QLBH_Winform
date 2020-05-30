@@ -31,10 +31,10 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label6 = new System.Windows.Forms.Label();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnOut = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.text = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
@@ -86,10 +86,10 @@
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel4.Controls.Add(this.button1, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.btnAdd, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.btnEdit, 1, 0);
             this.tableLayoutPanel4.Controls.Add(this.btnOut, 3, 0);
-            this.tableLayoutPanel4.Controls.Add(this.button2, 2, 0);
+            this.tableLayoutPanel4.Controls.Add(this.btnDelete, 2, 0);
             this.tableLayoutPanel4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tableLayoutPanel4.Location = new System.Drawing.Point(21, 196);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
@@ -98,15 +98,16 @@
             this.tableLayoutPanel4.Size = new System.Drawing.Size(774, 54);
             this.tableLayoutPanel4.TabIndex = 25;
             // 
-            // button1
+            // btnAdd
             // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.button1.Location = new System.Drawing.Point(3, 9);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(144, 35);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Thêm sản phẩm";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnAdd.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.btnAdd.Location = new System.Drawing.Point(3, 9);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(144, 35);
+            this.btnAdd.TabIndex = 3;
+            this.btnAdd.Text = "Thêm sản phẩm";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnEdit
             // 
@@ -117,6 +118,7 @@
             this.btnEdit.TabIndex = 3;
             this.btnEdit.Text = "Sửa";
             this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnOut
             // 
@@ -127,16 +129,18 @@
             this.btnOut.TabIndex = 3;
             this.btnOut.Text = "Thoát";
             this.btnOut.UseVisualStyleBackColor = true;
+            this.btnOut.Click += new System.EventHandler(this.btnOut_Click);
             // 
-            // button2
+            // btnDelete
             // 
-            this.button2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button2.Location = new System.Drawing.Point(410, 9);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(144, 35);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Xóa";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnDelete.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnDelete.Location = new System.Drawing.Point(410, 9);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(144, 35);
+            this.btnDelete.TabIndex = 3;
+            this.btnDelete.Text = "Xóa";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -188,6 +192,8 @@
             this.listCate.Name = "listCate";
             this.listCate.Size = new System.Drawing.Size(774, 225);
             this.listCate.TabIndex = 27;
+            this.listCate.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.listCate_CellClick);
+            this.listCate.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.listCate_DataError);
             // 
             // FrmCategory
             // 
@@ -200,6 +206,7 @@
             this.Controls.Add(this.tableLayoutPanel3);
             this.Name = "FrmCategory";
             this.Text = "FrmCategory";
+            this.Load += new System.EventHandler(this.FrmCategory_Load);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
@@ -215,10 +222,10 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnOut;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label text;
         private System.Windows.Forms.TextBox txtName;

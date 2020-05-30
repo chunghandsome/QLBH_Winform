@@ -38,5 +38,18 @@ namespace QLBH
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<selectProduct_Result>("selectProduct");
         }
+    
+        public virtual int createAttr(Nullable<int> type, string value)
+        {
+            var typeParameter = type.HasValue ?
+                new ObjectParameter("type", type) :
+                new ObjectParameter("type", typeof(int));
+    
+            var valueParameter = value != null ?
+                new ObjectParameter("value", value) :
+                new ObjectParameter("value", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("createAttr", typeParameter, valueParameter);
+        }
     }
 }

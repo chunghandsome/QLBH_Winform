@@ -13,7 +13,7 @@ namespace QLBH
     public partial class FrmCategory : Form
     {
         String id;
-        QLBHModel db = new QLBHModel();
+        QLBHEntities2 db = new QLBHEntities2();
         public FrmCategory()
         {
             InitializeComponent();

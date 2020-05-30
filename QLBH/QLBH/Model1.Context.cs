@@ -15,10 +15,10 @@ namespace QLBH
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class QLBHModel : DbContext
+    public partial class QLBHEntities2 : DbContext
     {
-        public QLBHModel()
-            : base("name=QLBHModel")
+        public QLBHEntities2()
+            : base("name=QLBHEntities2")
         {
         }
     
@@ -32,12 +32,8 @@ namespace QLBH
         public virtual DbSet<BillDetail> BillDetails { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<productAttr> productAttrs { get; set; }
         public virtual DbSet<User> Users { get; set; }
-    
-        public virtual ObjectResult<selectProduct_Result> selectProduct()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<selectProduct_Result>("selectProduct");
-        }
     
         public virtual int createAttr(Nullable<int> type, string value)
         {
@@ -50,6 +46,30 @@ namespace QLBH
                 new ObjectParameter("value", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("createAttr", typeParameter, valueParameter);
+        }
+    
+        public virtual ObjectResult<selectProduct_Result> selectProduct()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<selectProduct_Result>("selectProduct");
+        }
+    
+        public virtual ObjectResult<getProduct_Result> getProduct()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getProduct_Result>("getProduct");
+        }
+    
+        public virtual ObjectResult<selectProductcate_Result> selectProductcate()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<selectProductcate_Result>("selectProductcate");
+        }
+    
+        public virtual ObjectResult<searchByCode_Result> searchByCode(Nullable<int> code)
+        {
+            var codeParameter = code.HasValue ?
+                new ObjectParameter("Code", code) :
+                new ObjectParameter("Code", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<searchByCode_Result>("searchByCode", codeParameter);
         }
     }
 }

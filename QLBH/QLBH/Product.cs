@@ -18,6 +18,7 @@ namespace QLBH
         public Product()
         {
             this.BillDetails = new HashSet<BillDetail>();
+            this.productAttrs = new HashSet<productAttr>();
         }
     
         public int id { get; set; }
@@ -32,5 +33,7 @@ namespace QLBH
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BillDetail> BillDetails { get; set; }
         public virtual Category Category { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<productAttr> productAttrs { get; set; }
     }
 }

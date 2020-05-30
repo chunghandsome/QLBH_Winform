@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="QLBHModels" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="QLBHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="Attribute">
     <Key>
       <PropertyRef Name="id" />
@@ -7,6 +7,7 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="value" Type="String" MaxLength="225" FixedLength="false" Unicode="true" />
     <Property Name="type" Type="Byte" />
+    <NavigationProperty Name="productAttrs" Relationship="Self.FK__productAt__attr___4AB81AF0" FromRole="Attribute" ToRole="productAttr" />
   </EntityType>
   <EntityType Name="Bill">
     <Key>
@@ -51,6 +52,17 @@
     <Property Name="created_at" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
     <NavigationProperty Name="BillDetails" Relationship="Self.FK__BillDetai__produ__1FCDBCEB" FromRole="Product" ToRole="BillDetail" />
     <NavigationProperty Name="Category" Relationship="Self.FK__Product__cat_id__15502E78" FromRole="Product" ToRole="Category" />
+    <NavigationProperty Name="productAttrs" Relationship="Self.FK__productAt__produ__49C3F6B7" FromRole="Product" ToRole="productAttr" />
+  </EntityType>
+  <EntityType Name="productAttr">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="product_id" Type="Int32" />
+    <Property Name="attr_id" Type="Int32" />
+    <NavigationProperty Name="Attribute" Relationship="Self.FK__productAt__attr___4AB81AF0" FromRole="productAttr" ToRole="Attribute" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__productAt__produ__49C3F6B7" FromRole="productAttr" ToRole="Product" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -63,6 +75,18 @@
     <Property Name="password" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
     <Property Name="role" Type="Byte" />
   </EntityType>
+  <Association Name="FK__productAt__attr___4AB81AF0">
+    <End Role="Attribute" Type="Self.Attribute" Multiplicity="0..1" />
+    <End Role="productAttr" Type="Self.productAttr" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Attribute">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="productAttr">
+        <PropertyRef Name="attr_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__BillDetai__bill___1ED998B2">
     <End Role="Bill" Type="Self.Bill" Multiplicity="0..1" />
     <End Role="BillDetail" Type="Self.BillDetail" Multiplicity="*" />
@@ -99,13 +123,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="QLBHModel" annotation:LazyLoadingEnabled="true">
+  <Association Name="FK__productAt__produ__49C3F6B7">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="productAttr" Type="Self.productAttr" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="productAttr">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QLBHEntities2" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Attributes" EntityType="Self.Attribute" />
     <EntitySet Name="Bills" EntityType="Self.Bill" />
     <EntitySet Name="BillDetails" EntityType="Self.BillDetail" />
     <EntitySet Name="Categories" EntityType="Self.Category" />
     <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="productAttrs" EntityType="Self.productAttr" />
     <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK__productAt__attr___4AB81AF0" Association="Self.FK__productAt__attr___4AB81AF0">
+      <End Role="Attribute" EntitySet="Attributes" />
+      <End Role="productAttr" EntitySet="productAttrs" />
+    </AssociationSet>
     <AssociationSet Name="FK__BillDetai__bill___1ED998B2" Association="Self.FK__BillDetai__bill___1ED998B2">
       <End Role="Bill" EntitySet="Bills" />
       <End Role="BillDetail" EntitySet="BillDetails" />
@@ -118,11 +159,17 @@
       <End Role="Category" EntitySet="Categories" />
       <End Role="Product" EntitySet="Products" />
     </AssociationSet>
-    <FunctionImport Name="selectProduct" ReturnType="Collection(QLBHModels.selectProduct_Result)" />
+    <AssociationSet Name="FK__productAt__produ__49C3F6B7" Association="Self.FK__productAt__produ__49C3F6B7">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="productAttr" EntitySet="productAttrs" />
+    </AssociationSet>
     <FunctionImport Name="createAttr">
       <Parameter Name="type" Mode="In" Type="Int32" />
       <Parameter Name="value" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="selectProduct" ReturnType="Collection(QLBHModel.selectProduct_Result)" />
+    <FunctionImport Name="getProduct" ReturnType="Collection(QLBHModel.getProduct_Result)" />
+    <FunctionImport Name="selectProductcate" ReturnType="Collection(QLBHModel.selectProductcate_Result)" />
   </EntityContainer>
   <ComplexType Name="selectProduct_Result">
     <Property Type="Int32" Name="id" Nullable="false" />
@@ -133,5 +180,23 @@
     <Property Type="String" Name="image" Nullable="true" MaxLength="225" />
     <Property Type="Int32" Name="quantity" Nullable="true" />
     <Property Type="Binary" Name="created_at" Nullable="false" MaxLength="8" />
+  </ComplexType>
+  <ComplexType Name="getProduct_Result">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="code" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="name" Nullable="true" MaxLength="225" />
+    <Property Type="Double" Name="price" Nullable="true" />
+    <Property Type="String" Name="Loai_san_pham" Nullable="true" MaxLength="225" />
+    <Property Type="Int32" Name="quantity" Nullable="true" />
+    <Property Type="String" Name="image" Nullable="true" MaxLength="225" />
+  </ComplexType>
+  <ComplexType Name="selectProductcate_Result">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="code" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="name" Nullable="true" MaxLength="225" />
+    <Property Type="Double" Name="price" Nullable="true" />
+    <Property Type="String" Name="Loai_san_pham" Nullable="true" MaxLength="225" />
+    <Property Type="Int32" Name="quantity" Nullable="true" />
+    <Property Type="String" Name="image" Nullable="true" MaxLength="225" />
   </ComplexType>
 </Schema>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="QLBHModels.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="QLBHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Attribute">
           <Key>
             <PropertyRef Name="id" />
@@ -51,12 +51,14 @@
           <Property Name="quantity" Type="int" />
           <Property Name="created_at" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'QLBH.dbo.productAttr' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="productAttr">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="product_id" Type="int" />
           <Property Name="attr_id" Type="int" />
-        </EntityType>-->
+        </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="id" />
@@ -104,23 +106,47 @@ warning 6013: The table/view 'QLBH.dbo.productAttr' does not have a primary key 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errors Found During Generation:
-error 6004: The table 'QLBH.dbo.productAttr' is referenced by a relationship, but cannot be found.
-        <Association Name="FK__productAt__attr___1A14E395" />-->
-        <!--Errors Found During Generation:
-error 6004: The table 'QLBH.dbo.productAttr' is referenced by a relationship, but cannot be found.
-        <Association Name="FK__productAt__produ__1920BF5C" />-->
+        <Association Name="FK__productAt__attr___4AB81AF0">
+          <End Role="Attribute" Type="Self.Attribute" Multiplicity="0..1" />
+          <End Role="productAttr" Type="Self.productAttr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attribute">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="productAttr">
+              <PropertyRef Name="attr_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__productAt__produ__49C3F6B7">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="productAttr" Type="Self.productAttr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="productAttr">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="createAttr" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="type" Type="int" Mode="In" />
           <Parameter Name="value" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="getProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="searchByCode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Code" Type="int" Mode="In" />
+        </Function>
         <Function Name="selectProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <EntityContainer Name="QLBHModelsStoreContainer">
+        <Function Name="selectProductcate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="QLBHModelStoreContainer">
           <EntitySet Name="Attribute" EntityType="Self.Attribute" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Bill" EntityType="Self.Bill" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BillDetail" EntityType="Self.BillDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="productAttr" EntityType="Self.productAttr" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__BillDetai__bill___1ED998B2" Association="Self.FK__BillDetai__bill___1ED998B2">
             <End Role="Bill" EntitySet="Bill" />
@@ -134,11 +160,19 @@ error 6004: The table 'QLBH.dbo.productAttr' is referenced by a relationship, bu
             <End Role="Category" EntitySet="Category" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
+          <AssociationSet Name="FK__productAt__attr___4AB81AF0" Association="Self.FK__productAt__attr___4AB81AF0">
+            <End Role="Attribute" EntitySet="Attribute" />
+            <End Role="productAttr" EntitySet="productAttr" />
+          </AssociationSet>
+          <AssociationSet Name="FK__productAt__produ__49C3F6B7" Association="Self.FK__productAt__produ__49C3F6B7">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="productAttr" EntitySet="productAttr" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="QLBHModels" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="QLBHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Attribute">
           <Key>
             <PropertyRef Name="id" />
@@ -146,6 +180,7 @@ error 6004: The table 'QLBH.dbo.productAttr' is referenced by a relationship, bu
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="value" Type="String" MaxLength="225" FixedLength="false" Unicode="true" />
           <Property Name="type" Type="Byte" />
+          <NavigationProperty Name="productAttrs" Relationship="Self.FK__productAt__attr___4AB81AF0" FromRole="Attribute" ToRole="productAttr" />
         </EntityType>
         <EntityType Name="Bill">
           <Key>
@@ -190,6 +225,17 @@ error 6004: The table 'QLBH.dbo.productAttr' is referenced by a relationship, bu
           <Property Name="created_at" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="BillDetails" Relationship="Self.FK__BillDetai__produ__1FCDBCEB" FromRole="Product" ToRole="BillDetail" />
           <NavigationProperty Name="Category" Relationship="Self.FK__Product__cat_id__15502E78" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="productAttrs" Relationship="Self.FK__productAt__produ__49C3F6B7" FromRole="Product" ToRole="productAttr" />
+        </EntityType>
+        <EntityType Name="productAttr">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="product_id" Type="Int32" />
+          <Property Name="attr_id" Type="Int32" />
+          <NavigationProperty Name="Attribute" Relationship="Self.FK__productAt__attr___4AB81AF0" FromRole="productAttr" ToRole="Attribute" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__productAt__produ__49C3F6B7" FromRole="productAttr" ToRole="Product" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -202,6 +248,18 @@ error 6004: The table 'QLBH.dbo.productAttr' is referenced by a relationship, bu
           <Property Name="password" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
           <Property Name="role" Type="Byte" />
         </EntityType>
+        <Association Name="FK__productAt__attr___4AB81AF0">
+          <End Role="Attribute" Type="Self.Attribute" Multiplicity="0..1" />
+          <End Role="productAttr" Type="Self.productAttr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Attribute">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="productAttr">
+              <PropertyRef Name="attr_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__BillDetai__bill___1ED998B2">
           <End Role="Bill" Type="Self.Bill" Multiplicity="0..1" />
           <End Role="BillDetail" Type="Self.BillDetail" Multiplicity="*" />
@@ -238,13 +296,30 @@ error 6004: The table 'QLBH.dbo.productAttr' is referenced by a relationship, bu
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="QLBHModel" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK__productAt__produ__49C3F6B7">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="productAttr" Type="Self.productAttr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="productAttr">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QLBHEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Attributes" EntityType="Self.Attribute" />
           <EntitySet Name="Bills" EntityType="Self.Bill" />
           <EntitySet Name="BillDetails" EntityType="Self.BillDetail" />
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="productAttrs" EntityType="Self.productAttr" />
           <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__productAt__attr___4AB81AF0" Association="Self.FK__productAt__attr___4AB81AF0">
+            <End Role="Attribute" EntitySet="Attributes" />
+            <End Role="productAttr" EntitySet="productAttrs" />
+          </AssociationSet>
           <AssociationSet Name="FK__BillDetai__bill___1ED998B2" Association="Self.FK__BillDetai__bill___1ED998B2">
             <End Role="Bill" EntitySet="Bills" />
             <End Role="BillDetail" EntitySet="BillDetails" />
@@ -257,10 +332,19 @@ error 6004: The table 'QLBH.dbo.productAttr' is referenced by a relationship, bu
             <End Role="Category" EntitySet="Categories" />
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
-          <FunctionImport Name="selectProduct" ReturnType="Collection(QLBHModels.selectProduct_Result)" />
+          <AssociationSet Name="FK__productAt__produ__49C3F6B7" Association="Self.FK__productAt__produ__49C3F6B7">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="productAttr" EntitySet="productAttrs" />
+          </AssociationSet>
           <FunctionImport Name="createAttr">
             <Parameter Name="type" Mode="In" Type="Int32" />
             <Parameter Name="value" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="selectProduct" ReturnType="Collection(QLBHModel.selectProduct_Result)" />
+          <FunctionImport Name="getProduct" ReturnType="Collection(QLBHModel.getProduct_Result)" />
+          <FunctionImport Name="selectProductcate" ReturnType="Collection(QLBHModel.selectProductcate_Result)" />
+          <FunctionImport Name="searchByCode" ReturnType="Collection(QLBHModel.searchByCode_Result)">
+          <Parameter Name="Code" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="selectProduct_Result">
@@ -273,14 +357,39 @@ error 6004: The table 'QLBH.dbo.productAttr' is referenced by a relationship, bu
           <Property Type="Int32" Name="quantity" Nullable="true" />
           <Property Type="Binary" Name="created_at" Nullable="false" MaxLength="8" />
         </ComplexType>
+        <ComplexType Name="getProduct_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="code" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="name" Nullable="true" MaxLength="225" />
+          <Property Type="Double" Name="price" Nullable="true" />
+          <Property Type="String" Name="Loai_san_pham" Nullable="true" MaxLength="225" />
+          <Property Type="Int32" Name="quantity" Nullable="true" />
+          <Property Type="String" Name="image" Nullable="true" MaxLength="225" />
+        </ComplexType>
+        <ComplexType Name="selectProductcate_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="code" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="name" Nullable="true" MaxLength="225" />
+          <Property Type="Double" Name="price" Nullable="true" />
+          <Property Type="String" Name="Loai_san_pham" Nullable="true" MaxLength="225" />
+          <Property Type="Int32" Name="quantity" Nullable="true" />
+          <Property Type="String" Name="image" Nullable="true" MaxLength="225" />
+        </ComplexType>
+        <ComplexType Name="searchByCode_Result">
+          <Property Type="String" Name="name" Nullable="true" MaxLength="225" />
+          <Property Type="Double" Name="price" Nullable="true" />
+          <Property Type="String" Name="Loai_san_pham" Nullable="true" MaxLength="225" />
+          <Property Type="Int32" Name="quantity" Nullable="true" />
+          <Property Type="String" Name="image" Nullable="true" MaxLength="225" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="QLBHModelsStoreContainer" CdmEntityContainer="QLBHModel">
+        <EntityContainerMapping StorageEntityContainer="QLBHModelStoreContainer" CdmEntityContainer="QLBHEntities2">
           <EntitySetMapping Name="Attributes">
-            <EntityTypeMapping TypeName="QLBHModels.Attribute">
+            <EntityTypeMapping TypeName="QLBHModel.Attribute">
               <MappingFragment StoreEntitySet="Attribute">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="value" ColumnName="value" />
@@ -289,7 +398,7 @@ error 6004: The table 'QLBH.dbo.productAttr' is referenced by a relationship, bu
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Bills">
-            <EntityTypeMapping TypeName="QLBHModels.Bill">
+            <EntityTypeMapping TypeName="QLBHModel.Bill">
               <MappingFragment StoreEntitySet="Bill">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="total" ColumnName="total" />
@@ -298,7 +407,7 @@ error 6004: The table 'QLBH.dbo.productAttr' is referenced by a relationship, bu
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BillDetails">
-            <EntityTypeMapping TypeName="QLBHModels.BillDetail">
+            <EntityTypeMapping TypeName="QLBHModel.BillDetail">
               <MappingFragment StoreEntitySet="BillDetail">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="bill_id" ColumnName="bill_id" />
@@ -308,7 +417,7 @@ error 6004: The table 'QLBH.dbo.productAttr' is referenced by a relationship, bu
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="QLBHModels.Category">
+            <EntityTypeMapping TypeName="QLBHModel.Category">
               <MappingFragment StoreEntitySet="Category">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -317,7 +426,7 @@ error 6004: The table 'QLBH.dbo.productAttr' is referenced by a relationship, bu
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="QLBHModels.Product">
+            <EntityTypeMapping TypeName="QLBHModel.Product">
               <MappingFragment StoreEntitySet="Product">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -330,8 +439,17 @@ error 6004: The table 'QLBH.dbo.productAttr' is referenced by a relationship, bu
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="productAttrs">
+            <EntityTypeMapping TypeName="QLBHModel.productAttr">
+              <MappingFragment StoreEntitySet="productAttr">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="attr_id" ColumnName="attr_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="QLBHModels.User">
+            <EntityTypeMapping TypeName="QLBHModel.User">
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -342,9 +460,10 @@ error 6004: The table 'QLBH.dbo.productAttr' is referenced by a relationship, bu
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="selectProduct" FunctionName="QLBHModels.Store.selectProduct">
+          <FunctionImportMapping FunctionImportName="createAttr" FunctionName="QLBHModel.Store.createAttr" />
+          <FunctionImportMapping FunctionImportName="selectProduct" FunctionName="QLBHModel.Store.selectProduct">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="QLBHModels.selectProduct_Result">
+              <ComplexTypeMapping TypeName="QLBHModel.selectProduct_Result">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="cat_id" ColumnName="cat_id" />
@@ -356,7 +475,43 @@ error 6004: The table 'QLBH.dbo.productAttr' is referenced by a relationship, bu
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="createAttr" FunctionName="QLBHModels.Store.createAttr" />
+          <FunctionImportMapping FunctionImportName="getProduct" FunctionName="QLBHModel.Store.getProduct">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLBHModel.getProduct_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="Loai_san_pham" ColumnName="Loai san pham" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="image" ColumnName="image" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="selectProductcate" FunctionName="QLBHModel.Store.selectProductcate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLBHModel.selectProductcate_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="Loai_san_pham" ColumnName="Loai san pham" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="image" ColumnName="image" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="searchByCode" FunctionName="QLBHModel.Store.searchByCode">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLBHModel.searchByCode_Result">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="Loai_san_pham" ColumnName="Loai san pham" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="image" ColumnName="image" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

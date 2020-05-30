@@ -14,8 +14,17 @@ namespace QLBH
     
     public partial class Attribute
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Attribute()
+        {
+            this.productAttrs = new HashSet<productAttr>();
+        }
+    
         public int id { get; set; }
         public string value { get; set; }
         public Nullable<byte> type { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<productAttr> productAttrs { get; set; }
     }
 }

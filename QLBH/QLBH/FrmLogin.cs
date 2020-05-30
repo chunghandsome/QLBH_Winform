@@ -12,7 +12,7 @@ namespace QLBH
 {
     public partial class FrmLogin : Form
     {
-        QLBHModel db = new QLBHModel();
+        QLBHEntities2 db = new QLBHEntities2();
         public FrmLogin()
         {
             InitializeComponent();

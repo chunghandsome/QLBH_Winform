@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="QLBHModels.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="QLBHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Attribute">
     <Key>
       <PropertyRef Name="id" />
@@ -46,12 +46,14 @@
     <Property Name="quantity" Type="int" />
     <Property Name="created_at" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'QLBH.dbo.productAttr' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="productAttr">
-          <Property Name="product_id" Type="int" />
-          <Property Name="attr_id" Type="int" />
-        </EntityType>-->
+  <EntityType Name="productAttr">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="product_id" Type="int" />
+    <Property Name="attr_id" Type="int" />
+  </EntityType>
   <EntityType Name="Users">
     <Key>
       <PropertyRef Name="id" />
@@ -99,23 +101,44 @@ warning 6013: The table/view 'QLBH.dbo.productAttr' does not have a primary key 
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <!--Errors Found During Generation:
-error 6004: The table 'QLBH.dbo.productAttr' is referenced by a relationship, but cannot be found.
-        <Association Name="FK__productAt__attr___1A14E395" />-->
-  <!--Errors Found During Generation:
-error 6004: The table 'QLBH.dbo.productAttr' is referenced by a relationship, but cannot be found.
-        <Association Name="FK__productAt__produ__1920BF5C" />-->
+  <Association Name="FK__productAt__attr___4AB81AF0">
+    <End Role="Attribute" Type="Self.Attribute" Multiplicity="0..1" />
+    <End Role="productAttr" Type="Self.productAttr" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Attribute">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="productAttr">
+        <PropertyRef Name="attr_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__productAt__produ__49C3F6B7">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="productAttr" Type="Self.productAttr" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="productAttr">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Function Name="createAttr" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="type" Type="int" Mode="In" />
     <Parameter Name="value" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="getProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="selectProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <EntityContainer Name="QLBHModelsStoreContainer">
+  <Function Name="selectProductcate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="QLBHModelStoreContainer">
     <EntitySet Name="Attribute" EntityType="Self.Attribute" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Bill" EntityType="Self.Bill" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BillDetail" EntityType="Self.BillDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="productAttr" EntityType="Self.productAttr" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__BillDetai__bill___1ED998B2" Association="Self.FK__BillDetai__bill___1ED998B2">
       <End Role="Bill" EntitySet="Bill" />
@@ -128,6 +151,14 @@ error 6004: The table 'QLBH.dbo.productAttr' is referenced by a relationship, bu
     <AssociationSet Name="FK__Product__cat_id__15502E78" Association="Self.FK__Product__cat_id__15502E78">
       <End Role="Category" EntitySet="Category" />
       <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK__productAt__attr___4AB81AF0" Association="Self.FK__productAt__attr___4AB81AF0">
+      <End Role="Attribute" EntitySet="Attribute" />
+      <End Role="productAttr" EntitySet="productAttr" />
+    </AssociationSet>
+    <AssociationSet Name="FK__productAt__produ__49C3F6B7" Association="Self.FK__productAt__produ__49C3F6B7">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="productAttr" EntitySet="productAttr" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

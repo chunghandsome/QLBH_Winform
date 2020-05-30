@@ -21,5 +21,11 @@ namespace QLBH
         {
             this.Close();
         }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            QLBHEntities2 db = new QLBHEntities2();
+            
+        }
     }
 }

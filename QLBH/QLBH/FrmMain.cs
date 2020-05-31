@@ -65,7 +65,7 @@ namespace QLBH
 
         private void btnOrder_Click(object sender, EventArgs e)
         {
-            FrmOrder od = new FrmOrder();
+            List od = new List();
             od.Show();
         }
 

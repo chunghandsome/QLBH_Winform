@@ -12,20 +12,38 @@ namespace QLBH
 {
     public partial class FrmOrder : Form
     {
+        QLBHEntities2 db = new QLBHEntities2();
         public FrmOrder()
         {
             InitializeComponent();
         }
 
-        private void btnOut_Click(object sender, EventArgs e)
+        private void btnSeach_Click(object sender, EventArgs e)
         {
-            this.Close();
+            var user = db.Users.Where(x => x.phone == txtPhone.Text ).Select(x => x).ToList();
+            if ( user.Count() > 0)
+            {
+                txtName.Text = user[0].name;
+                txtEmail.Text = user[0].email;
+                txtSdt.Text = user[0].phone;
+            }else
+            {
+                MessageBox.Show("So dien thoai chua dang ki");
+            }
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)
         {
-            QLBHEntities2 db = new QLBHEntities2();
-            
+            try
+            {
+                db.Categories.Add(new Category { Name = txtName.Text });
+                db.SaveChanges();
+                MessageBox.Show("Thêm thành công!", "Thêm mới");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Them moi khong thanh cong");
+            }
         }
     }
 }

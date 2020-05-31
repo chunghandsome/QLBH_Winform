@@ -14,15 +14,19 @@
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="total" Type="float" />
+    <Property Name="maHoaDon" Type="nvarchar" MaxLength="255" />
+    <Property Name="userPhone" Type="varchar" MaxLength="255" />
     <Property Name="create_at" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+    <Property Name="adminPhone" Type="varchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="BillDetail">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="bill_id" Type="int" />
     <Property Name="product_id" Type="int" />
+    <Property Name="bill_id" Type="int" />
+    <Property Name="quantity" Type="int" Nullable="false" />
     <Property Name="created_at" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
   </EntityType>
   <EntityType Name="Category">
@@ -65,7 +69,7 @@
     <Property Name="password" Type="varchar" MaxLength="225" />
     <Property Name="role" Type="tinyint" />
   </EntityType>
-  <Association Name="FK__BillDetai__bill___1ED998B2">
+  <Association Name="FK__BillDetai__bill___7F2BE32F">
     <End Role="Bill" Type="Self.Bill" Multiplicity="0..1" />
     <End Role="BillDetail" Type="Self.BillDetail" Multiplicity="*" />
     <ReferentialConstraint>
@@ -77,7 +81,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__BillDetai__produ__1FCDBCEB">
+  <Association Name="FK__BillDetai__produ__7E37BEF6">
     <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
     <End Role="BillDetail" Type="Self.BillDetail" Multiplicity="*" />
     <ReferentialConstraint>
@@ -129,7 +133,31 @@
     <Parameter Name="type" Type="int" Mode="In" />
     <Parameter Name="value" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="getAttrByProductId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="getBillDetailbyBill" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BillId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="getBillDetailbyBill1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BillId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="getPrice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="code" Type="int" Mode="In" />
+  </Function>
+  <Function Name="getPrice1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="code" Type="int" Mode="In" />
+  </Function>
   <Function Name="getProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="getProductByCode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="code" Type="int" Mode="In" />
+  </Function>
+  <Function Name="getTotal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="code" Type="int" Mode="In" />
+  </Function>
+  <Function Name="searchByCode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Code" Type="int" Mode="In" />
+  </Function>
   <Function Name="selectProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="selectProductcate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="QLBHModelStoreContainer">
@@ -140,11 +168,11 @@
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="productAttr" EntityType="Self.productAttr" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__BillDetai__bill___1ED998B2" Association="Self.FK__BillDetai__bill___1ED998B2">
+    <AssociationSet Name="FK__BillDetai__bill___7F2BE32F" Association="Self.FK__BillDetai__bill___7F2BE32F">
       <End Role="Bill" EntitySet="Bill" />
       <End Role="BillDetail" EntitySet="BillDetail" />
     </AssociationSet>
-    <AssociationSet Name="FK__BillDetai__produ__1FCDBCEB" Association="Self.FK__BillDetai__produ__1FCDBCEB">
+    <AssociationSet Name="FK__BillDetai__produ__7E37BEF6" Association="Self.FK__BillDetai__produ__7E37BEF6">
       <End Role="Product" EntitySet="Product" />
       <End Role="BillDetail" EntitySet="BillDetail" />
     </AssociationSet>

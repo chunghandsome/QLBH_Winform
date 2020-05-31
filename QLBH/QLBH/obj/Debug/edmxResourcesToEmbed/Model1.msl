@@ -13,8 +13,11 @@
     <EntitySetMapping Name="Bills">
       <EntityTypeMapping TypeName="QLBHModel.Bill">
         <MappingFragment StoreEntitySet="Bill">
+          <ScalarProperty Name="maHoaDon" ColumnName="maHoaDon" />
+          <ScalarProperty Name="adminPhone" ColumnName="adminPhone" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="total" ColumnName="total" />
+          <ScalarProperty Name="userPhone" ColumnName="userPhone" />
           <ScalarProperty Name="create_at" ColumnName="create_at" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -22,9 +25,10 @@
     <EntitySetMapping Name="BillDetails">
       <EntityTypeMapping TypeName="QLBHModel.BillDetail">
         <MappingFragment StoreEntitySet="BillDetail">
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
           <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="bill_id" ColumnName="bill_id" />
           <ScalarProperty Name="product_id" ColumnName="product_id" />
+          <ScalarProperty Name="bill_id" ColumnName="bill_id" />
           <ScalarProperty Name="created_at" ColumnName="created_at" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -74,17 +78,11 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="createAttr" FunctionName="QLBHModel.Store.createAttr" />
-    <FunctionImportMapping FunctionImportName="selectProduct" FunctionName="QLBHModel.Store.selectProduct">
+    <FunctionImportMapping FunctionImportName="getAttrByProductId" FunctionName="QLBHModel.Store.getAttrByProductId">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="QLBHModel.selectProduct_Result">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="cat_id" ColumnName="cat_id" />
-          <ScalarProperty Name="code" ColumnName="code" />
-          <ScalarProperty Name="price" ColumnName="price" />
-          <ScalarProperty Name="image" ColumnName="image" />
-          <ScalarProperty Name="quantity" ColumnName="quantity" />
-          <ScalarProperty Name="created_at" ColumnName="created_at" />
+        <ComplexTypeMapping TypeName="QLBHModel.getAttrByProductId_Result">
+          <ScalarProperty Name="value" ColumnName="value" />
+          <ScalarProperty Name="type" ColumnName="type" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -101,6 +99,43 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="getProductByCode" FunctionName="QLBHModel.Store.getProductByCode">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QLBHModel.getProductByCode_Result">
+          <ScalarProperty Name="Id_sản_phẩm" ColumnName="Id sản phẩm" />
+          <ScalarProperty Name="Tên_sản_phẩm" ColumnName="Tên sản phẩm" />
+          <ScalarProperty Name="Giá_sản_phẩm" ColumnName="Giá sản phẩm" />
+          <ScalarProperty Name="Mã_sản_phẩm" ColumnName="Mã sản phẩm" />
+          <ScalarProperty Name="Tên_danh_mục" ColumnName="Tên danh mục" />
+          <ScalarProperty Name="Ảnh_sản_phẩm" ColumnName="Ảnh sản phẩm" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="searchByCode" FunctionName="QLBHModel.Store.searchByCode">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QLBHModel.searchByCode_Result">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="Loai_san_pham" ColumnName="Loai san pham" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="image" ColumnName="image" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="selectProduct" FunctionName="QLBHModel.Store.selectProduct">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QLBHModel.selectProduct_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="cat_id" ColumnName="cat_id" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="selectProductcate" FunctionName="QLBHModel.Store.selectProductcate">
       <ResultMapping>
         <ComplexTypeMapping TypeName="QLBHModel.selectProductcate_Result">
@@ -111,6 +146,38 @@
           <ScalarProperty Name="Loai_san_pham" ColumnName="Loai san pham" />
           <ScalarProperty Name="quantity" ColumnName="quantity" />
           <ScalarProperty Name="image" ColumnName="image" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="getBillDetailbyBill" FunctionName="QLBHModel.Store.getBillDetailbyBill">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QLBHModel.getBillDetailbyBill_Result">
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="Name1" ColumnName="Name1" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="getBillDetailbyBill1" FunctionName="QLBHModel.Store.getBillDetailbyBill1">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QLBHModel.getBillDetailbyBill1_Result">
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="Mame_cate" ColumnName="Mame cate" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="getPrice" FunctionName="QLBHModel.Store.getPrice" />
+    <FunctionImportMapping FunctionImportName="getTotal" FunctionName="QLBHModel.Store.getTotal" />
+    <FunctionImportMapping FunctionImportName="getPrice1" FunctionName="QLBHModel.Store.getPrice1">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="QLBHModel.getPrice1_Result">
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

@@ -48,9 +48,13 @@ namespace QLBH
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("createAttr", typeParameter, valueParameter);
         }
     
-        public virtual ObjectResult<selectProduct_Result> selectProduct()
+        public virtual ObjectResult<getAttrByProductId_Result> getAttrByProductId(Nullable<int> id)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<selectProduct_Result>("selectProduct");
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getAttrByProductId_Result>("getAttrByProductId", idParameter);
         }
     
         public virtual ObjectResult<getProduct_Result> getProduct()
@@ -58,9 +62,13 @@ namespace QLBH
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getProduct_Result>("getProduct");
         }
     
-        public virtual ObjectResult<selectProductcate_Result> selectProductcate()
+        public virtual ObjectResult<getProductByCode_Result> getProductByCode(Nullable<int> code)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<selectProductcate_Result>("selectProductcate");
+            var codeParameter = code.HasValue ?
+                new ObjectParameter("code", code) :
+                new ObjectParameter("code", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getProductByCode_Result>("getProductByCode", codeParameter);
         }
     
         public virtual ObjectResult<searchByCode_Result> searchByCode(Nullable<int> code)
@@ -70,6 +78,61 @@ namespace QLBH
                 new ObjectParameter("Code", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<searchByCode_Result>("searchByCode", codeParameter);
+        }
+    
+        public virtual ObjectResult<selectProduct_Result> selectProduct()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<selectProduct_Result>("selectProduct");
+        }
+    
+        public virtual ObjectResult<selectProductcate_Result> selectProductcate()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<selectProductcate_Result>("selectProductcate");
+        }
+    
+        public virtual ObjectResult<getBillDetailbyBill_Result> getBillDetailbyBill(Nullable<int> billId)
+        {
+            var billIdParameter = billId.HasValue ?
+                new ObjectParameter("BillId", billId) :
+                new ObjectParameter("BillId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getBillDetailbyBill_Result>("getBillDetailbyBill", billIdParameter);
+        }
+    
+        public virtual ObjectResult<getBillDetailbyBill1_Result> getBillDetailbyBill1(Nullable<int> billId)
+        {
+            var billIdParameter = billId.HasValue ?
+                new ObjectParameter("BillId", billId) :
+                new ObjectParameter("BillId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getBillDetailbyBill1_Result>("getBillDetailbyBill1", billIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<double>> getPrice(Nullable<int> code)
+        {
+            var codeParameter = code.HasValue ?
+                new ObjectParameter("code", code) :
+                new ObjectParameter("code", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<double>>("getPrice", codeParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<double>> getTotal(Nullable<int> code)
+        {
+            var codeParameter = code.HasValue ?
+                new ObjectParameter("code", code) :
+                new ObjectParameter("code", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<double>>("getTotal", codeParameter);
+        }
+    
+        public virtual ObjectResult<getPrice1_Result> getPrice1(Nullable<int> code)
+        {
+            var codeParameter = code.HasValue ?
+                new ObjectParameter("code", code) :
+                new ObjectParameter("code", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getPrice1_Result>("getPrice1", codeParameter);
         }
     }
 }

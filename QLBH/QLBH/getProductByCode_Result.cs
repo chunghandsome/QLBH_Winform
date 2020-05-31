@@ -10,17 +10,14 @@
 namespace QLBH
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class BillDetail
+    public partial class getProductByCode_Result
     {
-        public int id { get; set; }
-        public Nullable<int> product_id { get; set; }
-        public Nullable<int> bill_id { get; set; }
-        public byte[] created_at { get; set; }
-        public int quantity { get; set; }
-    
-        public virtual Bill Bill { get; set; }
-        public virtual Product Product { get; set; }
+        public int Id_sản_phẩm { get; set; }
+        public string Tên_sản_phẩm { get; set; }
+        public Nullable<double> Giá_sản_phẩm { get; set; }
+        public string Mã_sản_phẩm { get; set; }
+        public string Tên_danh_mục { get; set; }
+        public string Ảnh_sản_phẩm { get; set; }
     }
 }

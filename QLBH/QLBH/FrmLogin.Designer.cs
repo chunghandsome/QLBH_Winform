@@ -33,7 +33,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.pass = new System.Windows.Forms.TextBox();
             this.tk = new System.Windows.Forms.TextBox();
-            this.listAccount = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -88,22 +87,12 @@
             this.tk.Size = new System.Drawing.Size(238, 37);
             this.tk.TabIndex = 5;
             // 
-            // listAccount
-            // 
-            this.listAccount.FormattingEnabled = true;
-            this.listAccount.Location = new System.Drawing.Point(13, 122);
-            this.listAccount.Name = "listAccount";
-            this.listAccount.Size = new System.Drawing.Size(208, 21);
-            this.listAccount.TabIndex = 10;
-            this.listAccount.SelectedIndexChanged += new System.EventHandler(this.listAccount_SelectedIndexChanged);
-            // 
             // FrmLogin
             // 
             this.AcceptButton = this.button1;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(592, 323);
-            this.Controls.Add(this.listAccount);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.button1);
@@ -111,7 +100,6 @@
             this.Controls.Add(this.tk);
             this.Name = "FrmLogin";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -124,7 +112,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox pass;
         private System.Windows.Forms.TextBox tk;
-        private System.Windows.Forms.ComboBox listAccount;
     }
 }
 

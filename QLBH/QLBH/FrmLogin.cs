@@ -19,8 +19,9 @@ namespace QLBH
         }
         void Login(string email, string password)
         {
-            var result = db.Users.Where(x => x.email == email && x.password == password).SingleOrDefault();
-            if (result != null)
+          
+            var result = db.Users.Where(x => x.email == email && x.password == password).ToList();
+            if (result.Count() > 0)
             {
                 FrmMain m = new FrmMain();
                 this.Hide();
@@ -36,7 +37,7 @@ namespace QLBH
         private void Form1_Load(object sender, EventArgs e)
         {
             var result = db.Products.Select(x=>x.name).ToList();
-            listAccount.DataSource = result;
+           
         }
 
         private void button1_Click(object sender, EventArgs e)

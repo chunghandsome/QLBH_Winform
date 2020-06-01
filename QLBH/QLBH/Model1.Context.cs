@@ -134,5 +134,50 @@ namespace QLBH
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getPrice1_Result>("getPrice1", codeParameter);
         }
+    
+        public virtual ObjectResult<getInfoToEditBillDetail_Result> getInfoToEditBillDetail(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getInfoToEditBillDetail_Result>("getInfoToEditBillDetail", idParameter);
+        }
+    
+        public virtual ObjectResult<GetInfoToEditBillDetail2_Result> GetInfoToEditBillDetail2(Nullable<int> idHoaDon)
+        {
+            var idHoaDonParameter = idHoaDon.HasValue ?
+                new ObjectParameter("idHoaDon", idHoaDon) :
+                new ObjectParameter("idHoaDon", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetInfoToEditBillDetail2_Result>("GetInfoToEditBillDetail2", idHoaDonParameter);
+        }
+    
+        public virtual ObjectResult<getInfoToEditBillDetail1_Result> getInfoToEditBillDetail1(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getInfoToEditBillDetail1_Result>("getInfoToEditBillDetail1", idParameter);
+        }
+    
+        public virtual ObjectResult<getInfoToEditBillDetail3_Result> getInfoToEditBillDetail3(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getInfoToEditBillDetail3_Result>("getInfoToEditBillDetail3", idParameter);
+        }
+    
+        public virtual ObjectResult<getBillDetail_Result> getBillDetail(Nullable<int> billId)
+        {
+            var billIdParameter = billId.HasValue ?
+                new ObjectParameter("BillId", billId) :
+                new ObjectParameter("BillId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<getBillDetail_Result>("getBillDetail", billIdParameter);
+        }
     }
 }

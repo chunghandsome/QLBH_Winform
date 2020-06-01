@@ -186,6 +186,7 @@
             this.listCate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.listCate.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.listCate.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.listCate.GridColor = System.Drawing.SystemColors.ButtonFace;
             this.listCate.Location = new System.Drawing.Point(21, 278);
@@ -205,6 +206,7 @@
             this.Controls.Add(this.tableLayoutPanel4);
             this.Controls.Add(this.tableLayoutPanel3);
             this.Name = "FrmCategory";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmCategory";
             this.Load += new System.EventHandler(this.FrmCategory_Load);
             this.tableLayoutPanel3.ResumeLayout(false);

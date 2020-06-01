@@ -35,12 +35,12 @@
             this.btnName = new System.Windows.Forms.Label();
             this.btnPassword = new System.Windows.Forms.Label();
             this.txtValue = new System.Windows.Forms.TextBox();
+            this.selectType = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnOut = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.selectType = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataAttr)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -52,6 +52,7 @@
             this.dataAttr.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataAttr.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataAttr.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataAttr.Location = new System.Drawing.Point(35, 282);
             this.dataAttr.Name = "dataAttr";
@@ -141,6 +142,17 @@
             this.txtValue.Size = new System.Drawing.Size(305, 32);
             this.txtValue.TabIndex = 1;
             // 
+            // selectType
+            // 
+            this.selectType.FormattingEnabled = true;
+            this.selectType.Items.AddRange(new object[] {
+            "Color",
+            "Size"});
+            this.selectType.Location = new System.Drawing.Point(80, 3);
+            this.selectType.Name = "selectType";
+            this.selectType.Size = new System.Drawing.Size(303, 21);
+            this.selectType.TabIndex = 2;
+            // 
             // tableLayoutPanel4
             // 
             this.tableLayoutPanel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -207,17 +219,6 @@
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // selectType
-            // 
-            this.selectType.FormattingEnabled = true;
-            this.selectType.Items.AddRange(new object[] {
-            "Color",
-            "Size"});
-            this.selectType.Location = new System.Drawing.Point(80, 3);
-            this.selectType.Name = "selectType";
-            this.selectType.Size = new System.Drawing.Size(303, 21);
-            this.selectType.TabIndex = 2;
-            // 
             // frmAttrbute
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -228,6 +229,7 @@
             this.Controls.Add(this.tableLayoutPanel3);
             this.Controls.Add(this.dataAttr);
             this.Name = "frmAttrbute";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản lý thuộc tính";
             this.Load += new System.EventHandler(this.frmAttrbute_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataAttr)).EndInit();

@@ -129,7 +129,7 @@
             this.tableLayoutPanel2.Controls.Add(this.txtColor, 3, 1);
             this.tableLayoutPanel2.Controls.Add(this.txtSize, 3, 2);
             this.tableLayoutPanel2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(36, 287);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(39, 340);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 3;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 48.64865F));
@@ -264,7 +264,7 @@
             this.tableLayoutPanel1.Controls.Add(this.text, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnSearch, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.txtSearch, 1, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(39, 134);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(39, 152);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -309,10 +309,11 @@
             this.listOrder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.listOrder.Location = new System.Drawing.Point(39, 494);
+            this.listOrder.Location = new System.Drawing.Point(39, 577);
             this.listOrder.Name = "listOrder";
-            this.listOrder.Size = new System.Drawing.Size(1149, 157);
+            this.listOrder.Size = new System.Drawing.Size(1149, 201);
             this.listOrder.TabIndex = 28;
+            this.listOrder.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.listOrder_CellClick);
             // 
             // tableLayoutPanel4
             // 
@@ -330,7 +331,7 @@
             this.tableLayoutPanel4.Controls.Add(this.btnOut, 3, 0);
             this.tableLayoutPanel4.Controls.Add(this.btnDelete, 2, 0);
             this.tableLayoutPanel4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(36, 405);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(39, 472);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -358,6 +359,7 @@
             this.btnEdit.TabIndex = 3;
             this.btnEdit.Text = "Sửa";
             this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnOut
             // 
@@ -399,7 +401,7 @@
             this.tableLayoutPanel5.Controls.Add(this.txtTenKhach, 3, 1);
             this.tableLayoutPanel5.Controls.Add(this.txtSdtKhach, 3, 0);
             this.tableLayoutPanel5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(39, 178);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(39, 225);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 2;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 48.64865F));
@@ -483,7 +485,7 @@
             // 
             // btnSeachMaKh
             // 
-            this.btnSeachMaKh.Location = new System.Drawing.Point(1160, 196);
+            this.btnSeachMaKh.Location = new System.Drawing.Point(576, 196);
             this.btnSeachMaKh.Name = "btnSeachMaKh";
             this.btnSeachMaKh.Size = new System.Drawing.Size(75, 23);
             this.btnSeachMaKh.TabIndex = 30;
@@ -493,14 +495,14 @@
             // 
             // txtMaHoaDon
             // 
-            this.txtMaHoaDon.Location = new System.Drawing.Point(72, 113);
+            this.txtMaHoaDon.Location = new System.Drawing.Point(181, 116);
             this.txtMaHoaDon.Name = "txtMaHoaDon";
             this.txtMaHoaDon.Size = new System.Drawing.Size(100, 20);
             this.txtMaHoaDon.TabIndex = 31;
             // 
             // txtTotal
             // 
-            this.txtTotal.Location = new System.Drawing.Point(301, 111);
+            this.txtTotal.Location = new System.Drawing.Point(643, 116);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.Size = new System.Drawing.Size(100, 20);
             this.txtTotal.TabIndex = 32;
@@ -508,7 +510,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(251, 119);
+            this.label10.Location = new System.Drawing.Point(589, 119);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(48, 13);
             this.label10.TabIndex = 33;
@@ -517,7 +519,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(36, 114);
+            this.label13.Location = new System.Drawing.Point(95, 118);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(68, 13);
             this.label13.TabIndex = 34;
@@ -527,7 +529,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1233, 711);
+            this.ClientSize = new System.Drawing.Size(1233, 790);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.txtTotal);
@@ -540,6 +542,7 @@
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel3);
             this.Name = "List";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmOrder";
             this.Load += new System.EventHandler(this.txtMaNv_Load);
             this.tableLayoutPanel3.ResumeLayout(false);

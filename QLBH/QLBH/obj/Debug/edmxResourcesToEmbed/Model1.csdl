@@ -198,6 +198,21 @@
     <FunctionImport Name="getPrice1" ReturnType="Collection(QLBHModel.getPrice1_Result)">
       <Parameter Name="code" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="getInfoToEditBillDetail" ReturnType="Collection(QLBHModel.getInfoToEditBillDetail_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetInfoToEditBillDetail2" ReturnType="Collection(QLBHModel.GetInfoToEditBillDetail2_Result)">
+      <Parameter Name="idHoaDon" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="getInfoToEditBillDetail1" ReturnType="Collection(QLBHModel.getInfoToEditBillDetail1_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="getInfoToEditBillDetail3" ReturnType="Collection(QLBHModel.getInfoToEditBillDetail3_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="getBillDetail" ReturnType="Collection(QLBHModel.getBillDetail_Result)">
+      <Parameter Name="BillId" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="getAttrByProductId_Result">
     <Property Type="String" Name="value" Nullable="true" MaxLength="225" />
@@ -261,6 +276,42 @@
     <Property Type="Int32" Name="quantity" Nullable="false" />
   </ComplexType>
   <ComplexType Name="getPrice1_Result">
+    <Property Type="Double" Name="price" Nullable="true" />
+    <Property Type="Int32" Name="quantity" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="getInfoToEditBillDetail_Result">
+    <Property Type="String" Name="name" Nullable="true" MaxLength="225" />
+    <Property Type="Double" Name="price" Nullable="true" />
+    <Property Type="String" Name="Name1" Nullable="true" MaxLength="225" />
+    <Property Type="String" Name="code" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="quantity" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GetInfoToEditBillDetail2_Result">
+    <Property Type="String" Name="maHoaDon" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="userPhone" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="adminPhone" Nullable="true" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="getInfoToEditBillDetail1_Result">
+    <Property Type="String" Name="name" Nullable="true" MaxLength="225" />
+    <Property Type="Double" Name="price" Nullable="true" />
+    <Property Type="String" Name="Name1" Nullable="true" MaxLength="225" />
+    <Property Type="String" Name="code" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="quantity" Nullable="false" />
+    <Property Type="Int32" Name="id" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="getInfoToEditBillDetail3_Result">
+    <Property Type="String" Name="name" Nullable="true" MaxLength="225" />
+    <Property Type="Double" Name="price" Nullable="true" />
+    <Property Type="String" Name="NameCate" Nullable="true" MaxLength="225" />
+    <Property Type="String" Name="code" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="quantity" Nullable="false" />
+    <Property Type="Int32" Name="id" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="getBillDetail_Result">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="code" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="name" Nullable="true" MaxLength="225" />
+    <Property Type="String" Name="Mame_cate" Nullable="true" MaxLength="225" />
     <Property Type="Double" Name="price" Nullable="true" />
     <Property Type="Int32" Name="quantity" Nullable="false" />
   </ComplexType>

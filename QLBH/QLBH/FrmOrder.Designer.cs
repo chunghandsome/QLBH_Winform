@@ -45,6 +45,7 @@
             // 
             // listOrder
             // 
+            this.listOrder.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.listOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.listOrder.Location = new System.Drawing.Point(24, 227);
             this.listOrder.Name = "listOrder";
@@ -162,6 +163,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listOrder);
             this.Name = "FrmOrder";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmOrder";
             ((System.ComponentModel.ISupportInitialize)(this.listOrder)).EndInit();
             this.ResumeLayout(false);

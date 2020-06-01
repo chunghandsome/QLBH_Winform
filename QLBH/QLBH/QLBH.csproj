@@ -126,6 +126,21 @@
     <Compile Include="getBillDetailbyBill_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="getBillDetail_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="getInfoToEditBillDetail1_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetInfoToEditBillDetail2_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="getInfoToEditBillDetail3_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="getInfoToEditBillDetail_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="getPrice1_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -233,6 +248,7 @@
     <None Include="Resources\background.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="db\" />
     <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
@@ -246,6 +262,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\341.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

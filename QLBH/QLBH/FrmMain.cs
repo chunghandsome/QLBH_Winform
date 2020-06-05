@@ -12,9 +12,11 @@ namespace QLBH
 {
     public partial class FrmMain : Form
     {
-        
-        public FrmMain()
+        String em = "";
+        public FrmMain( String email)
         {
+
+            em = email;
             InitializeComponent();
         }
 
@@ -31,8 +33,16 @@ namespace QLBH
 
         private void btnUser_Click(object sender, EventArgs e)
         {
-            FrmAccount ac = new FrmAccount();
-            ac.Show();
+             if(em =="admin@gmail.com")
+            {
+                FrmAccount ac = new FrmAccount();
+                ac.Show();
+            }else
+            {
+                MessageBox.Show("Bạn không có quyền vào quản lý người dùng");
+            }
+          
+           
         }
 
         private void FrmMain_Load(object sender, EventArgs e)
@@ -59,13 +69,22 @@ namespace QLBH
 
         private void btnUser_Click_1(object sender, EventArgs e)
         {
-            FrmAccount ac = new FrmAccount();
-            ac.Show();
+            if (em == "admin@gmail.com")
+            {
+                FrmAccount ac = new FrmAccount();
+                ac.Show();
+            }
+            else
+            {
+                MessageBox.Show("Bạn không có quyền vào quản lý người dùng");
+            }
+
+            
         }
 
         private void btnOrder_Click(object sender, EventArgs e)
         {
-            List od = new List();
+            List od = new List(em);
             od.Show();
         }
 
@@ -78,6 +97,21 @@ namespace QLBH
         private void btnLogout_Click_1(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnBill_Click(object sender, EventArgs e)
+        {
+            new FrmOrder().Show();
+        }
+
+        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

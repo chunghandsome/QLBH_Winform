@@ -25,8 +25,11 @@ namespace QLBH
         }
         private void autoLoad()
         {
-            var r = db.Categories.Select(x => x).ToList();
+            var r = db.getcat().ToList();
             listCate.DataSource = r;
+            listCate.Columns[0].HeaderText = "Mã danh mục";
+            listCate.Columns[1].HeaderText = "Tên danh mục";
+            listCate.Columns[2].HeaderText = "Ngày tạo";
         }
         private void FrmCategory_Load(object sender, EventArgs e)
         {
@@ -37,14 +40,22 @@ namespace QLBH
         {
             try
             {
-                db.Categories.Add(new Category { Name = txtName.Text });
-                db.SaveChanges();
-                MessageBox.Show("Thêm thành công!", "Thêm mới");
-                autoLoad();
+                if (!string.IsNullOrEmpty(txtSearch.Text))
+                {
+                    var c = new Category { Name = txtName.Text, create_at = DateTime.Now };
+                    db.Categories.Add(c);
+                    db.SaveChanges();
+                    MessageBox.Show("Thêm thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.None);
+                    autoLoad();
+                }else
+                {
+                    MessageBox.Show("Nhập tên lại sản phẩm ");
+                }
+               
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Them moi khong thanh cong");
+                MessageBox.Show("Thêm mới thất bại!", "Thông báo",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
 
         }
@@ -61,7 +72,7 @@ namespace QLBH
             }
             else
             {
-                MessageBox.Show("Chon truoc khi sua");
+                MessageBox.Show("Bạn phải chọn trước khi sửa!");
             }
 
         }
@@ -83,20 +94,40 @@ namespace QLBH
                 {
                     Byte i = Convert.ToByte(id);
                     Category attr = db.Categories.FirstOrDefault(a => a.id.Equals(i));
-                    db.Categories.Remove(attr);
-                    db.SaveChanges();
-                    autoLoad();
+                    var p = db.Products.Where(x => x.cat_id == i).Select(x => x).ToList();
+                    if( p.Count() <= 0)
+                    {
+                        db.Categories.Remove(attr);
+                        db.SaveChanges();
+                        autoLoad();
+                    }else {
+                        MessageBox.Show("Bạn không thể xóa loại sản phẩm này ");
+                    }
+                  
                 }
             }
             else
             {
-                MessageBox.Show("Chon truoc khi xoa");
+                MessageBox.Show("Bạn phảo chọn trước khi xóa");
             }
         }
 
         private void listCate_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             e.Cancel = true;
+        }
+
+        private void txtSearch_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtSearch.Text))
+            {
+                autoLoad();
+            }
+            else
+            {
+                var result = db.searchCateName(txtSearch.Text);
+                listCate.DataSource = result;
+            }
         }
     }
 }

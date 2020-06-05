@@ -13,6 +13,7 @@ namespace QLBH
     
     public partial class getBillDetailbyBill1_Result
     {
+        public int id { get; set; }
         public string code { get; set; }
         public string name { get; set; }
         public string Mame_cate { get; set; }

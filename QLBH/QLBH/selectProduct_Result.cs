@@ -20,6 +20,6 @@ namespace QLBH
         public Nullable<double> price { get; set; }
         public string image { get; set; }
         public Nullable<int> quantity { get; set; }
-        public byte[] created_at { get; set; }
+        public Nullable<System.DateTime> create_at { get; set; }
     }
 }

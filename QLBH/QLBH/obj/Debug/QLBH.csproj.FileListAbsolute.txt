@@ -18,3 +18,4 @@ C:\Users\Chung Dep Trai\Desktop\QLBH\QLBH\QLBH\obj\Debug\QLBH.FrmAccount.resourc
 C:\Users\Chung Dep Trai\Desktop\QLBH\QLBH\QLBH\obj\Debug\QLBH.FrmCategory.resources
 C:\Users\Chung Dep Trai\Desktop\QLBH\QLBH\QLBH\obj\Debug\QLBH.FrmOrder.resources
 C:\Users\Chung Dep Trai\Desktop\QLBH\QLBH\QLBH\obj\Debug\QLBH.List.resources
+C:\Users\Chung Dep Trai\Desktop\QLBH\QLBH\QLBH\obj\Debug\QLBH.FrmDetails.resources

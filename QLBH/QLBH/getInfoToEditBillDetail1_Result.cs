@@ -15,7 +15,7 @@ namespace QLBH
     {
         public string name { get; set; }
         public Nullable<double> price { get; set; }
-        public string Name1 { get; set; }
+        public string NameCate { get; set; }
         public string code { get; set; }
         public int quantity { get; set; }
         public int id { get; set; }

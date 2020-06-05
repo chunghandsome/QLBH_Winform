@@ -18,5 +18,6 @@ namespace QLBH
         public string Name1 { get; set; }
         public string code { get; set; }
         public int quantity { get; set; }
+        public int id { get; set; }
     }
 }

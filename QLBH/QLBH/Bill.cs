@@ -22,10 +22,10 @@ namespace QLBH
     
         public int id { get; set; }
         public Nullable<double> total { get; set; }
-        public string userPhone { get; set; }
-        public byte[] create_at { get; set; }
-        public string adminPhone { get; set; }
         public string maHoaDon { get; set; }
+        public string userPhone { get; set; }
+        public Nullable<System.DateTime> create_at { get; set; }
+        public string adminPhone { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BillDetail> BillDetails { get; set; }

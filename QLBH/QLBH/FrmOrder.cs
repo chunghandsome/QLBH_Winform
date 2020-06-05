@@ -12,6 +12,7 @@ namespace QLBH
 {
     public partial class FrmOrder : Form
     {
+        String id;
         QLBHEntities2 db = new QLBHEntities2();
         public FrmOrder()
         {
@@ -20,30 +21,44 @@ namespace QLBH
 
         private void btnSeach_Click(object sender, EventArgs e)
         {
-            var user = db.Users.Where(x => x.phone == txtPhone.Text ).Select(x => x).ToList();
-            if ( user.Count() > 0)
+            if (string.IsNullOrEmpty(txtMa.Text))
             {
-                txtName.Text = user[0].name;
-                txtEmail.Text = user[0].email;
-                txtSdt.Text = user[0].phone;
-            }else
-            {
-                MessageBox.Show("So dien thoai chua dang ki");
+                listOrders.DataSource = db.Bills.ToList();
             }
+            else
+            {
+                var bill = db.Bills.Where(x => x.maHoaDon == txtMa.Text).Select(x => x).ToList();
+                if (bill.Count() > 0)
+                {
+                    listOrders.DataSource = bill;
+                }
+                else
+                { 
+                   MessageBox.Show("Mã hóa đơn không tông tại");
+                }
+               
+            }
+
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void FrmOrder_Load(object sender, EventArgs e)
         {
-            try
-            {
-                db.Categories.Add(new Category { Name = txtName.Text });
-                db.SaveChanges();
-                MessageBox.Show("Thêm thành công!", "Thêm mới");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Them moi khong thanh cong");
-            }
+            listOrders.DataSource = db.getAllBill().ToList();
+        }
+
+        private void listOrders_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int index = e.RowIndex;
+            DataGridViewRow selectedRow = listOrders.Rows[index];
+             id = selectedRow.Cells[0].Value.ToString();
+            
+
+        }
+
+        private void btnDetail_Click(object sender, EventArgs e)
+        {
+            int i = Convert.ToInt32(id);
+            new FrmDetails(i).Show();
         }
     }
 }

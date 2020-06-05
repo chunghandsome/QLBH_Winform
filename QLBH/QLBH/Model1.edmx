@@ -21,7 +21,7 @@
           <Property Name="total" Type="float" />
           <Property Name="maHoaDon" Type="nvarchar" MaxLength="255" />
           <Property Name="userPhone" Type="varchar" MaxLength="255" />
-          <Property Name="create_at" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="create_at" Type="date" />
           <Property Name="adminPhone" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="BillDetail">
@@ -32,7 +32,10 @@
           <Property Name="product_id" Type="int" />
           <Property Name="bill_id" Type="int" />
           <Property Name="quantity" Type="int" Nullable="false" />
-          <Property Name="created_at" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="total" Type="float" />
+          <Property Name="adminPhone" Type="nvarchar" MaxLength="255" />
+          <Property Name="userPhone" Type="nvarchar" MaxLength="255" />
+          <Property Name="create_at" Type="date" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -40,7 +43,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="225" />
-          <Property Name="created_at" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="create_at" Type="date" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -53,7 +56,7 @@
           <Property Name="price" Type="float" />
           <Property Name="image" Type="varchar" MaxLength="225" />
           <Property Name="quantity" Type="int" />
-          <Property Name="created_at" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="create_at" Type="date" />
         </EntityType>
         <EntityType Name="productAttr">
           <Key>
@@ -74,7 +77,7 @@
           <Property Name="password" Type="varchar" MaxLength="225" />
           <Property Name="role" Type="tinyint" />
         </EntityType>
-        <Association Name="FK__BillDetai__bill___7F2BE32F">
+        <Association Name="FK__BillDetai__bill___5F7E2DAC">
           <End Role="Bill" Type="Self.Bill" Multiplicity="0..1" />
           <End Role="BillDetail" Type="Self.BillDetail" Multiplicity="*" />
           <ReferentialConstraint>
@@ -86,7 +89,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__BillDetai__produ__7E37BEF6">
+        <Association Name="FK__BillDetai__produ__607251E5">
           <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
           <End Role="BillDetail" Type="Self.BillDetail" Multiplicity="*" />
           <ReferentialConstraint>
@@ -98,7 +101,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Product__cat_id__15502E78">
+        <Association Name="FK__Product__cat_id__6166761E">
           <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -110,7 +113,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__productAt__attr___4AB81AF0">
+        <Association Name="FK__Product__cat_id__6AEFE058">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="cat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__productAt__attr___69FBBC1F">
           <End Role="Attribute" Type="Self.Attribute" Multiplicity="0..1" />
           <End Role="productAttr" Type="Self.productAttr" Multiplicity="*" />
           <ReferentialConstraint>
@@ -122,7 +137,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__productAt__produ__49C3F6B7">
+        <Association Name="FK__productAt__produ__6BE40491">
           <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
           <End Role="productAttr" Type="Self.productAttr" Multiplicity="*" />
           <ReferentialConstraint>
@@ -138,10 +153,21 @@
           <Parameter Name="type" Type="int" Mode="In" />
           <Parameter Name="value" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="getAllBill" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="getAttr" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="getAttrByProductId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
         <Function Name="getBillDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BillId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getBillDetail4" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BillId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getBillDetail5" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BillId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getBillDetail6" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="BillId" Type="int" Mode="In" />
         </Function>
         <Function Name="getBillDetailbyBill" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -150,6 +176,14 @@
         <Function Name="getBillDetailbyBill1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="BillId" Type="int" Mode="In" />
         </Function>
+        <Function Name="getBillDetailByMaProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="code" Type="nvarchar" Mode="In" />
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getBillDetailtoList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BillId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getcat" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="getInfoToEditBillDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
@@ -172,14 +206,34 @@
         <Function Name="getProductByCode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="code" Type="int" Mode="In" />
         </Function>
+        <Function Name="getProductByCodec" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="code" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="getProductIdQuantity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="maHD" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="getProductIdQuantity1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="maHD" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="getProductQtt" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idBillD" Type="int" Mode="In" />
+        </Function>
         <Function Name="getTotal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="code" Type="int" Mode="In" />
         </Function>
         <Function Name="searchByCode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Code" Type="int" Mode="In" />
         </Function>
+        <Function Name="searchCateName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="selectProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="selectProductcate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="selectProductcate1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="selectProductcate2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="selectProductSearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="code" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="QLBHModelStoreContainer">
           <EntitySet Name="Attribute" EntityType="Self.Attribute" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Bill" EntityType="Self.Bill" Schema="dbo" store:Type="Tables" />
@@ -188,23 +242,27 @@
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="productAttr" EntityType="Self.productAttr" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__BillDetai__bill___7F2BE32F" Association="Self.FK__BillDetai__bill___7F2BE32F">
+          <AssociationSet Name="FK__BillDetai__bill___5F7E2DAC" Association="Self.FK__BillDetai__bill___5F7E2DAC">
             <End Role="Bill" EntitySet="Bill" />
             <End Role="BillDetail" EntitySet="BillDetail" />
           </AssociationSet>
-          <AssociationSet Name="FK__BillDetai__produ__7E37BEF6" Association="Self.FK__BillDetai__produ__7E37BEF6">
+          <AssociationSet Name="FK__BillDetai__produ__607251E5" Association="Self.FK__BillDetai__produ__607251E5">
             <End Role="Product" EntitySet="Product" />
             <End Role="BillDetail" EntitySet="BillDetail" />
           </AssociationSet>
-          <AssociationSet Name="FK__Product__cat_id__15502E78" Association="Self.FK__Product__cat_id__15502E78">
+          <AssociationSet Name="FK__Product__cat_id__6166761E" Association="Self.FK__Product__cat_id__6166761E">
             <End Role="Category" EntitySet="Category" />
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
-          <AssociationSet Name="FK__productAt__attr___4AB81AF0" Association="Self.FK__productAt__attr___4AB81AF0">
+          <AssociationSet Name="FK__Product__cat_id__6AEFE058" Association="Self.FK__Product__cat_id__6AEFE058">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__productAt__attr___69FBBC1F" Association="Self.FK__productAt__attr___69FBBC1F">
             <End Role="Attribute" EntitySet="Attribute" />
             <End Role="productAttr" EntitySet="productAttr" />
           </AssociationSet>
-          <AssociationSet Name="FK__productAt__produ__49C3F6B7" Association="Self.FK__productAt__produ__49C3F6B7">
+          <AssociationSet Name="FK__productAt__produ__6BE40491" Association="Self.FK__productAt__produ__6BE40491">
             <End Role="Product" EntitySet="Product" />
             <End Role="productAttr" EntitySet="productAttr" />
           </AssociationSet>
@@ -220,7 +278,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="value" Type="String" MaxLength="225" FixedLength="false" Unicode="true" />
           <Property Name="type" Type="Byte" />
-          <NavigationProperty Name="productAttrs" Relationship="Self.FK__productAt__attr___4AB81AF0" FromRole="Attribute" ToRole="productAttr" />
+          <NavigationProperty Name="productAttrs" Relationship="Self.FK__productAt__attr___69FBBC1F" FromRole="Attribute" ToRole="productAttr" />
         </EntityType>
         <EntityType Name="Bill">
           <Key>
@@ -228,11 +286,11 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="total" Type="Double" />
-          <Property Name="userPhone" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="create_at" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
-          <NavigationProperty Name="BillDetails" Relationship="Self.FK__BillDetai__bill___6E01572D" FromRole="Bill" ToRole="BillDetail" />
-          <Property Name="adminPhone" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="maHoaDon" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="userPhone" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="create_at" Type="DateTime" Precision="0" />
+          <Property Name="adminPhone" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BillDetails" Relationship="Self.FK__BillDetai__bill___5F7E2DAC" FromRole="Bill" ToRole="BillDetail" />
         </EntityType>
         <EntityType Name="BillDetail">
           <Key>
@@ -241,10 +299,13 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="product_id" Type="Int32" />
           <Property Name="bill_id" Type="Int32" />
-          <Property Name="created_at" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
-          <NavigationProperty Name="Bill" Relationship="Self.FK__BillDetai__bill___6E01572D" FromRole="BillDetail" ToRole="Bill" />
-          <NavigationProperty Name="Product" Relationship="Self.FK__BillDetai__produ__6D0D32F4" FromRole="BillDetail" ToRole="Product" />
           <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="total" Type="Double" />
+          <Property Name="adminPhone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="userPhone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="create_at" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Bill" Relationship="Self.FK__BillDetai__bill___5F7E2DAC" FromRole="BillDetail" ToRole="Bill" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__BillDetai__produ__607251E5" FromRole="BillDetail" ToRole="Product" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -252,8 +313,9 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="225" FixedLength="false" Unicode="true" />
-          <Property Name="created_at" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
-          <NavigationProperty Name="Products" Relationship="Self.FK__Product__cat_id__15502E78" FromRole="Category" ToRole="Product" />
+          <Property Name="create_at" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Product__cat_id__6166761E" FromRole="Category" ToRole="Product" />
+          <NavigationProperty Name="Products1" Relationship="Self.FK__Product__cat_id__6AEFE058" FromRole="Category" ToRole="Product" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -266,10 +328,11 @@
           <Property Name="price" Type="Double" />
           <Property Name="image" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
           <Property Name="quantity" Type="Int32" />
-          <Property Name="created_at" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
-          <NavigationProperty Name="BillDetails" Relationship="Self.FK__BillDetai__produ__6D0D32F4" FromRole="Product" ToRole="BillDetail" />
-          <NavigationProperty Name="Category" Relationship="Self.FK__Product__cat_id__15502E78" FromRole="Product" ToRole="Category" />
-          <NavigationProperty Name="productAttrs" Relationship="Self.FK__productAt__produ__49C3F6B7" FromRole="Product" ToRole="productAttr" />
+          <Property Name="create_at" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="BillDetails" Relationship="Self.FK__BillDetai__produ__607251E5" FromRole="Product" ToRole="BillDetail" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Product__cat_id__6166761E" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="Category1" Relationship="Self.FK__Product__cat_id__6AEFE058" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="productAttrs" Relationship="Self.FK__productAt__produ__6BE40491" FromRole="Product" ToRole="productAttr" />
         </EntityType>
         <EntityType Name="productAttr">
           <Key>
@@ -278,8 +341,8 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="product_id" Type="Int32" />
           <Property Name="attr_id" Type="Int32" />
-          <NavigationProperty Name="Attribute" Relationship="Self.FK__productAt__attr___4AB81AF0" FromRole="productAttr" ToRole="Attribute" />
-          <NavigationProperty Name="Product" Relationship="Self.FK__productAt__produ__49C3F6B7" FromRole="productAttr" ToRole="Product" />
+          <NavigationProperty Name="Attribute" Relationship="Self.FK__productAt__attr___69FBBC1F" FromRole="productAttr" ToRole="Attribute" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__productAt__produ__6BE40491" FromRole="productAttr" ToRole="Product" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -292,7 +355,7 @@
           <Property Name="password" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
           <Property Name="role" Type="Byte" />
         </EntityType>
-        <Association Name="FK__productAt__attr___4AB81AF0">
+        <Association Name="FK__productAt__attr___69FBBC1F">
           <End Role="Attribute" Type="Self.Attribute" Multiplicity="0..1" />
           <End Role="productAttr" Type="Self.productAttr" Multiplicity="*" />
           <ReferentialConstraint>
@@ -304,7 +367,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__BillDetai__bill___6E01572D">
+        <Association Name="FK__BillDetai__bill___5F7E2DAC">
           <End Role="Bill" Type="Self.Bill" Multiplicity="0..1" />
           <End Role="BillDetail" Type="Self.BillDetail" Multiplicity="*" />
           <ReferentialConstraint>
@@ -316,7 +379,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__BillDetai__produ__6D0D32F4">
+        <Association Name="FK__BillDetai__produ__607251E5">
           <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
           <End Role="BillDetail" Type="Self.BillDetail" Multiplicity="*" />
           <ReferentialConstraint>
@@ -328,7 +391,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Product__cat_id__15502E78">
+        <Association Name="FK__Product__cat_id__6166761E">
           <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
@@ -340,7 +403,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__productAt__produ__49C3F6B7">
+        <Association Name="FK__Product__cat_id__6AEFE058">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="cat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__productAt__produ__6BE40491">
           <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
           <End Role="productAttr" Type="Self.productAttr" Multiplicity="*" />
           <ReferentialConstraint>
@@ -360,23 +435,27 @@
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="productAttrs" EntityType="Self.productAttr" />
           <EntitySet Name="Users" EntityType="Self.User" />
-          <AssociationSet Name="FK__productAt__attr___4AB81AF0" Association="Self.FK__productAt__attr___4AB81AF0">
+          <AssociationSet Name="FK__productAt__attr___69FBBC1F" Association="Self.FK__productAt__attr___69FBBC1F">
             <End Role="Attribute" EntitySet="Attributes" />
             <End Role="productAttr" EntitySet="productAttrs" />
           </AssociationSet>
-          <AssociationSet Name="FK__BillDetai__bill___6E01572D" Association="Self.FK__BillDetai__bill___6E01572D">
+          <AssociationSet Name="FK__BillDetai__bill___5F7E2DAC" Association="Self.FK__BillDetai__bill___5F7E2DAC">
             <End Role="Bill" EntitySet="Bills" />
             <End Role="BillDetail" EntitySet="BillDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK__BillDetai__produ__6D0D32F4" Association="Self.FK__BillDetai__produ__6D0D32F4">
+          <AssociationSet Name="FK__BillDetai__produ__607251E5" Association="Self.FK__BillDetai__produ__607251E5">
             <End Role="Product" EntitySet="Products" />
             <End Role="BillDetail" EntitySet="BillDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK__Product__cat_id__15502E78" Association="Self.FK__Product__cat_id__15502E78">
+          <AssociationSet Name="FK__Product__cat_id__6166761E" Association="Self.FK__Product__cat_id__6166761E">
             <End Role="Category" EntitySet="Categories" />
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
-          <AssociationSet Name="FK__productAt__produ__49C3F6B7" Association="Self.FK__productAt__produ__49C3F6B7">
+          <AssociationSet Name="FK__Product__cat_id__6AEFE058" Association="Self.FK__Product__cat_id__6AEFE058">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__productAt__produ__6BE40491" Association="Self.FK__productAt__produ__6BE40491">
             <End Role="Product" EntitySet="Products" />
             <End Role="productAttr" EntitySet="productAttrs" />
           </AssociationSet>
@@ -384,52 +463,234 @@
             <Parameter Name="type" Mode="In" Type="Int32" />
             <Parameter Name="value" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="getAllBill" ReturnType="Collection(QLBHModel.getAllBill_Result)" />
+          <FunctionImport Name="getAttr" ReturnType="Collection(QLBHModel.getAttr_Result)" />
           <FunctionImport Name="getAttrByProductId" ReturnType="Collection(QLBHModel.getAttrByProductId_Result)">
           <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="getProduct" ReturnType="Collection(QLBHModel.getProduct_Result)" />
-          <FunctionImport Name="getProductByCode" ReturnType="Collection(QLBHModel.getProductByCode_Result)">
-          <Parameter Name="code" Mode="In" Type="Int32" />
+          <FunctionImport Name="getBillDetail" ReturnType="Collection(QLBHModel.getBillDetail_Result)">
+          <Parameter Name="BillId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="searchByCode" ReturnType="Collection(QLBHModel.searchByCode_Result)">
-          <Parameter Name="Code" Mode="In" Type="Int32" />
+          <FunctionImport Name="getBillDetail4" ReturnType="Collection(QLBHModel.getBillDetail4_Result)">
+          <Parameter Name="BillId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="selectProduct" ReturnType="Collection(QLBHModel.selectProduct_Result)" />
-          <FunctionImport Name="selectProductcate" ReturnType="Collection(QLBHModel.selectProductcate_Result)" />
+          <FunctionImport Name="getBillDetail5" ReturnType="Collection(QLBHModel.getBillDetail5_Result)">
+          <Parameter Name="BillId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getBillDetail6" ReturnType="Collection(QLBHModel.getBillDetail6_Result)">
+          <Parameter Name="BillId" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="getBillDetailbyBill" ReturnType="Collection(QLBHModel.getBillDetailbyBill_Result)">
           <Parameter Name="BillId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="getBillDetailbyBill1" ReturnType="Collection(QLBHModel.getBillDetailbyBill1_Result)">
           <Parameter Name="BillId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="getPrice" ReturnType="Collection(Double)">
-          <Parameter Name="code" Mode="In" Type="Int32" />
+          <FunctionImport Name="getBillDetailByMaProduct" ReturnType="Collection(QLBHModel.getBillDetailByMaProduct_Result)">
+            <Parameter Name="code" Mode="In" Type="String" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="getTotal" ReturnType="Collection(Double)">
-          <Parameter Name="code" Mode="In" Type="Int32" />
+          <FunctionImport Name="getBillDetailtoList" ReturnType="Collection(QLBHModel.getBillDetailtoList_Result)">
+          <Parameter Name="BillId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="getPrice1" ReturnType="Collection(QLBHModel.getPrice1_Result)">
-          <Parameter Name="code" Mode="In" Type="Int32" />
-          </FunctionImport>
+          <FunctionImport Name="getcat" ReturnType="Collection(QLBHModel.getcat_Result)" />
           <FunctionImport Name="getInfoToEditBillDetail" ReturnType="Collection(QLBHModel.getInfoToEditBillDetail_Result)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getInfoToEditBillDetail1" ReturnType="Collection(QLBHModel.getInfoToEditBillDetail1_Result)">
           <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetInfoToEditBillDetail2" ReturnType="Collection(QLBHModel.GetInfoToEditBillDetail2_Result)">
           <Parameter Name="idHoaDon" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="getInfoToEditBillDetail1" ReturnType="Collection(QLBHModel.getInfoToEditBillDetail1_Result)">
-          <Parameter Name="id" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="getInfoToEditBillDetail3" ReturnType="Collection(QLBHModel.getInfoToEditBillDetail3_Result)">
           <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="getBillDetail" ReturnType="Collection(QLBHModel.getBillDetail_Result)">
-            <Parameter Name="BillId" Mode="In" Type="Int32" />
+          <FunctionImport Name="getPrice" ReturnType="Collection(Int32)">
+          <Parameter Name="code" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getPrice1" ReturnType="Collection(QLBHModel.getPrice1_Result)">
+          <Parameter Name="code" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getProduct" ReturnType="Collection(QLBHModel.getProduct_Result)" />
+          <FunctionImport Name="getProductByCode" ReturnType="Collection(QLBHModel.getProductByCode_Result)">
+          <Parameter Name="code" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getProductIdQuantity" ReturnType="Collection(QLBHModel.getProductIdQuantity_Result)">
+          <Parameter Name="maHD" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="getProductIdQuantity1" ReturnType="Collection(QLBHModel.getProductIdQuantity1_Result)">
+          <Parameter Name="maHD" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="getProductQtt" ReturnType="Collection(Int32)">
+          <Parameter Name="idBillD" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getTotal" ReturnType="Collection(Double)">
+          <Parameter Name="code" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="searchByCode" ReturnType="Collection(QLBHModel.searchByCode_Result)">
+          <Parameter Name="Code" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="searchCateName" ReturnType="Collection(QLBHModel.searchCateName_Result)">
+          <Parameter Name="name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="selectProduct" ReturnType="Collection(QLBHModel.selectProduct_Result)" />
+          <FunctionImport Name="selectProductcate" ReturnType="Collection(QLBHModel.selectProductcate_Result)" />
+          <FunctionImport Name="selectProductcate1" ReturnType="Collection(QLBHModel.selectProductcate1_Result)" />
+          <FunctionImport Name="selectProductcate2" ReturnType="Collection(QLBHModel.selectProductcate2_Result)" />
+          <FunctionImport Name="selectProductSearch" ReturnType="Collection(QLBHModel.selectProductSearch_Result)">
+          <Parameter Name="code" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="getProductByCodec" ReturnType="Collection(QLBHModel.getProductByCodec_Result)">
+            <Parameter Name="code" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="getAllBill_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Double" Name="total" Nullable="true" />
+          <Property Type="String" Name="maHoaDon" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="userPhone" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="create_at" Nullable="true" />
+          <Property Type="String" Name="adminPhone" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="getAttr_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="value" Nullable="true" MaxLength="225" />
+          <Property Type="Byte" Name="type" Nullable="true" />
+        </ComplexType>
         <ComplexType Name="getAttrByProductId_Result">
           <Property Type="String" Name="value" Nullable="true" MaxLength="225" />
           <Property Type="Byte" Name="type" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="getBillDetail_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="code" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="name" Nullable="true" MaxLength="225" />
+          <Property Type="String" Name="value" Nullable="true" MaxLength="225" />
+          <Property Type="String" Name="Mame_cate" Nullable="true" MaxLength="225" />
+          <Property Type="Double" Name="price" Nullable="true" />
+          <Property Type="Int32" Name="quantity" Nullable="false" />
+          <Property Type="Int32" Name="bill_id" Nullable="true" />
+          <Property Type="Double" Name="total" Nullable="true" />
+          <Property Type="Byte" Name="type" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="getBillDetail4_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="code" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="name" Nullable="true" MaxLength="225" />
+          <Property Type="String" Name="Mame_cate" Nullable="true" MaxLength="225" />
+          <Property Type="Double" Name="price" Nullable="true" />
+          <Property Type="Int32" Name="quantity" Nullable="false" />
+          <Property Type="Int32" Name="bill_id" Nullable="true" />
+          <Property Type="Double" Name="total" Nullable="true" />
+          <Property Type="String" Name="color" Nullable="true" MaxLength="225" />
+          <Property Type="String" Name="size" Nullable="true" MaxLength="225" />
+        </ComplexType>
+        <ComplexType Name="getBillDetail5_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="code" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="name" Nullable="true" MaxLength="225" />
+          <Property Type="String" Name="Mame_cate" Nullable="true" MaxLength="225" />
+          <Property Type="Double" Name="price" Nullable="true" />
+          <Property Type="Int32" Name="quantity" Nullable="false" />
+          <Property Type="Int32" Name="bill_id" Nullable="true" />
+          <Property Type="Double" Name="total" Nullable="true" />
+          <Property Type="String" Name="color" Nullable="true" MaxLength="225" />
+          <Property Type="String" Name="size" Nullable="true" MaxLength="225" />
+        </ComplexType>
+        <ComplexType Name="getBillDetail6_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="code" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="name" Nullable="true" MaxLength="225" />
+          <Property Type="String" Name="color" Nullable="true" MaxLength="225" />
+          <Property Type="String" Name="size" Nullable="true" MaxLength="225" />
+          <Property Type="String" Name="Mame_cate" Nullable="true" MaxLength="225" />
+          <Property Type="Double" Name="price" Nullable="true" />
+          <Property Type="Int32" Name="quantity" Nullable="false" />
+          <Property Type="Int32" Name="bill_id" Nullable="true" />
+          <Property Type="Double" Name="total" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="getBillDetailbyBill_Result">
+          <Property Type="String" Name="code" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="name" Nullable="true" MaxLength="225" />
+          <Property Type="String" Name="Name1" Nullable="true" MaxLength="225" />
+          <Property Type="Double" Name="price" Nullable="true" />
+          <Property Type="Int32" Name="quantity" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="getBillDetailbyBill1_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="code" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="name" Nullable="true" MaxLength="225" />
+          <Property Type="String" Name="Mame_cate" Nullable="true" MaxLength="225" />
+          <Property Type="Double" Name="price" Nullable="true" />
+          <Property Type="Int32" Name="quantity" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="getBillDetailByMaProduct_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="product_id" Nullable="true" />
+          <Property Type="Int32" Name="bill_id" Nullable="true" />
+          <Property Type="Int32" Name="quantity" Nullable="false" />
+          <Property Type="Double" Name="total" Nullable="true" />
+          <Property Type="String" Name="adminPhone" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="userPhone" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="create_at" Nullable="true" />
+          <Property Type="Int32" Name="id1" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="true" MaxLength="225" />
+          <Property Type="Int32" Name="cat_id" Nullable="true" />
+          <Property Type="String" Name="code" Nullable="true" MaxLength="50" />
+          <Property Type="Double" Name="price" Nullable="true" />
+          <Property Type="String" Name="image" Nullable="true" MaxLength="225" />
+          <Property Type="Int32" Name="quantity1" Nullable="true" />
+          <Property Type="DateTime" Name="create_at1" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="getBillDetailtoList_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="code" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="name" Nullable="true" MaxLength="225" />
+          <Property Type="String" Name="Mame_cate" Nullable="true" MaxLength="225" />
+          <Property Type="Double" Name="price" Nullable="true" />
+          <Property Type="Int32" Name="quantity" Nullable="false" />
+          <Property Type="Double" Name="total" Nullable="true" />
+          <Property Type="String" Name="adminPhone" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="userPhone" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="getcat_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="225" />
+          <Property Type="DateTime" Name="create_at" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="getInfoToEditBillDetail_Result">
+          <Property Type="String" Name="name" Nullable="true" MaxLength="225" />
+          <Property Type="Double" Name="price" Nullable="true" />
+          <Property Type="String" Name="Name1" Nullable="true" MaxLength="225" />
+          <Property Type="String" Name="code" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="quantity" Nullable="false" />
+          <Property Type="Int32" Name="id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="getInfoToEditBillDetail1_Result">
+          <Property Type="String" Name="name" Nullable="true" MaxLength="225" />
+          <Property Type="Double" Name="price" Nullable="true" />
+          <Property Type="String" Name="NameCate" Nullable="true" MaxLength="225" />
+          <Property Type="String" Name="code" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="quantity" Nullable="false" />
+          <Property Type="Int32" Name="id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetInfoToEditBillDetail2_Result">
+          <Property Type="String" Name="maHoaDon" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="userPhone" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="adminPhone" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="getInfoToEditBillDetail3_Result">
+          <Property Type="String" Name="name" Nullable="true" MaxLength="225" />
+          <Property Type="Double" Name="price" Nullable="true" />
+          <Property Type="String" Name="NameCate" Nullable="true" MaxLength="225" />
+          <Property Type="String" Name="code" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="quantity" Nullable="false" />
+          <Property Type="Int32" Name="id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="getPrice1_Result">
+          <Property Type="Double" Name="price" Nullable="true" />
+          <Property Type="Int32" Name="quantity" Nullable="false" />
         </ComplexType>
         <ComplexType Name="getProduct_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -448,12 +709,28 @@
           <Property Type="String" Name="Tên_danh_mục" Nullable="true" MaxLength="225" />
           <Property Type="String" Name="Ảnh_sản_phẩm" Nullable="true" MaxLength="225" />
         </ComplexType>
+        <ComplexType Name="getProductIdQuantity_Result">
+          <Property Type="Int32" Name="product_id" Nullable="true" />
+          <Property Type="Int32" Name="quantity" Nullable="false" />
+          <Property Type="Int32" Name="ProductQuantity" Nullable="true" />
+          <Property Type="Int32" Name="id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="getProductIdQuantity1_Result">
+          <Property Type="Int32" Name="product_id" Nullable="true" />
+          <Property Type="Int32" Name="quantity" Nullable="false" />
+          <Property Type="Int32" Name="ProductQuantity" Nullable="true" />
+        </ComplexType>
         <ComplexType Name="searchByCode_Result">
           <Property Type="String" Name="name" Nullable="true" MaxLength="225" />
           <Property Type="Double" Name="price" Nullable="true" />
           <Property Type="String" Name="Loai_san_pham" Nullable="true" MaxLength="225" />
           <Property Type="Int32" Name="quantity" Nullable="true" />
           <Property Type="String" Name="image" Nullable="true" MaxLength="225" />
+        </ComplexType>
+        <ComplexType Name="searchCateName_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="225" />
+          <Property Type="DateTime" Name="create_at" Nullable="true" />
         </ComplexType>
         <ComplexType Name="selectProduct_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -463,7 +740,7 @@
           <Property Type="Double" Name="price" Nullable="true" />
           <Property Type="String" Name="image" Nullable="true" MaxLength="225" />
           <Property Type="Int32" Name="quantity" Nullable="true" />
-          <Property Type="Binary" Name="created_at" Nullable="false" MaxLength="8" />
+          <Property Type="DateTime" Name="create_at" Nullable="true" />
         </ComplexType>
         <ComplexType Name="selectProductcate_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -473,60 +750,49 @@
           <Property Type="String" Name="Loai_san_pham" Nullable="true" MaxLength="225" />
           <Property Type="Int32" Name="quantity" Nullable="true" />
           <Property Type="String" Name="image" Nullable="true" MaxLength="225" />
+          <Property Type="String" Name="value" Nullable="true" MaxLength="225" />
+          <Property Type="Byte" Name="type" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="getBillDetailbyBill_Result">
-          <Property Type="String" Name="code" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="name" Nullable="true" MaxLength="225" />
-          <Property Type="String" Name="Name1" Nullable="true" MaxLength="225" />
-          <Property Type="Double" Name="price" Nullable="true" />
-          <Property Type="Int32" Name="quantity" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="getBillDetailbyBill1_Result">
-          <Property Type="String" Name="code" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="name" Nullable="true" MaxLength="225" />
-          <Property Type="String" Name="Mame_cate" Nullable="true" MaxLength="225" />
-          <Property Type="Double" Name="price" Nullable="true" />
-          <Property Type="Int32" Name="quantity" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="getPrice1_Result">
-          <Property Type="Double" Name="price" Nullable="true" />
-          <Property Type="Int32" Name="quantity" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="getInfoToEditBillDetail_Result">
-          <Property Type="String" Name="name" Nullable="true" MaxLength="225" />
-          <Property Type="Double" Name="price" Nullable="true" />
-          <Property Type="String" Name="Name1" Nullable="true" MaxLength="225" />
-          <Property Type="String" Name="code" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="quantity" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="GetInfoToEditBillDetail2_Result">
-          <Property Type="String" Name="maHoaDon" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="userPhone" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="adminPhone" Nullable="true" MaxLength="255" />
-        </ComplexType>
-        <ComplexType Name="getInfoToEditBillDetail1_Result">
-          <Property Type="String" Name="name" Nullable="true" MaxLength="225" />
-          <Property Type="Double" Name="price" Nullable="true" />
-          <Property Type="String" Name="Name1" Nullable="true" MaxLength="225" />
-          <Property Type="String" Name="code" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="quantity" Nullable="false" />
-          <Property Type="Int32" Name="id" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="getInfoToEditBillDetail3_Result">
-          <Property Type="String" Name="name" Nullable="true" MaxLength="225" />
-          <Property Type="Double" Name="price" Nullable="true" />
-          <Property Type="String" Name="NameCate" Nullable="true" MaxLength="225" />
-          <Property Type="String" Name="code" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="quantity" Nullable="false" />
-          <Property Type="Int32" Name="id" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="getBillDetail_Result">
+        <ComplexType Name="selectProductcate1_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
           <Property Type="String" Name="code" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="name" Nullable="true" MaxLength="225" />
-          <Property Type="String" Name="Mame_cate" Nullable="true" MaxLength="225" />
           <Property Type="Double" Name="price" Nullable="true" />
-          <Property Type="Int32" Name="quantity" Nullable="false" />
+          <Property Type="String" Name="Loai_san_pham" Nullable="true" MaxLength="225" />
+          <Property Type="Int32" Name="quantity" Nullable="true" />
+          <Property Type="String" Name="image" Nullable="true" MaxLength="225" />
+          <Property Type="String" Name="color" Nullable="true" MaxLength="225" />
+          <Property Type="String" Name="size" Nullable="true" MaxLength="225" />
+        </ComplexType>
+        <ComplexType Name="selectProductcate2_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="code" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="name" Nullable="true" MaxLength="225" />
+          <Property Type="Double" Name="price" Nullable="true" />
+          <Property Type="String" Name="Loai_san_pham" Nullable="true" MaxLength="225" />
+          <Property Type="Int32" Name="quantity" Nullable="true" />
+          <Property Type="String" Name="image" Nullable="true" MaxLength="225" />
+          <Property Type="String" Name="color" Nullable="true" MaxLength="225" />
+          <Property Type="String" Name="size" Nullable="true" MaxLength="225" />
+        </ComplexType>
+        <ComplexType Name="selectProductSearch_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="code" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="name" Nullable="true" MaxLength="225" />
+          <Property Type="Double" Name="price" Nullable="true" />
+          <Property Type="String" Name="Loai_san_pham" Nullable="true" MaxLength="225" />
+          <Property Type="Int32" Name="quantity" Nullable="true" />
+          <Property Type="String" Name="image" Nullable="true" MaxLength="225" />
+          <Property Type="String" Name="color" Nullable="true" MaxLength="225" />
+          <Property Type="String" Name="size" Nullable="true" MaxLength="225" />
+        </ComplexType>
+        <ComplexType Name="getProductByCodec_Result">
+          <Property Type="Int32" Name="Id_sản_phẩm" Nullable="false" />
+          <Property Type="String" Name="Tên_sản_phẩm" Nullable="true" MaxLength="225" />
+          <Property Type="Double" Name="Giá_sản_phẩm" Nullable="true" />
+          <Property Type="String" Name="Mã_sản_phẩm" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Tên_danh_mục" Nullable="true" MaxLength="225" />
+          <Property Type="String" Name="Ảnh_sản_phẩm" Nullable="true" MaxLength="225" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -546,23 +812,26 @@
           <EntitySetMapping Name="Bills">
             <EntityTypeMapping TypeName="QLBHModel.Bill">
               <MappingFragment StoreEntitySet="Bill">
-                <ScalarProperty Name="maHoaDon" ColumnName="maHoaDon" />
-                <ScalarProperty Name="adminPhone" ColumnName="adminPhone" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="maHoaDon" ColumnName="maHoaDon" />
                 <ScalarProperty Name="userPhone" ColumnName="userPhone" />
                 <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="adminPhone" ColumnName="adminPhone" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BillDetails">
             <EntityTypeMapping TypeName="QLBHModel.BillDetail">
               <MappingFragment StoreEntitySet="BillDetail">
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="product_id" ColumnName="product_id" />
                 <ScalarProperty Name="bill_id" ColumnName="bill_id" />
-                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="adminPhone" ColumnName="adminPhone" />
+                <ScalarProperty Name="userPhone" ColumnName="userPhone" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -571,7 +840,7 @@
               <MappingFragment StoreEntitySet="Category">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -585,7 +854,7 @@
                 <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="image" ColumnName="image" />
                 <ScalarProperty Name="quantity" ColumnName="quantity" />
-                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -611,11 +880,219 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="createAttr" FunctionName="QLBHModel.Store.createAttr" />
+          <FunctionImportMapping FunctionImportName="getAllBill" FunctionName="QLBHModel.Store.getAllBill">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLBHModel.getAllBill_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="maHoaDon" ColumnName="maHoaDon" />
+                <ScalarProperty Name="userPhone" ColumnName="userPhone" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="adminPhone" ColumnName="adminPhone" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getAttr" FunctionName="QLBHModel.Store.getAttr">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLBHModel.getAttr_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="type" ColumnName="type" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="getAttrByProductId" FunctionName="QLBHModel.Store.getAttrByProductId">
             <ResultMapping>
               <ComplexTypeMapping TypeName="QLBHModel.getAttrByProductId_Result">
                 <ScalarProperty Name="value" ColumnName="value" />
                 <ScalarProperty Name="type" ColumnName="type" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getBillDetail" FunctionName="QLBHModel.Store.getBillDetail">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLBHModel.getBillDetail_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="Mame_cate" ColumnName="Mame cate" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="bill_id" ColumnName="bill_id" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="type" ColumnName="type" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getBillDetail4" FunctionName="QLBHModel.Store.getBillDetail4">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLBHModel.getBillDetail4_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Mame_cate" ColumnName="Mame cate" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="bill_id" ColumnName="bill_id" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="size" ColumnName="size" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getBillDetail5" FunctionName="QLBHModel.Store.getBillDetail5">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLBHModel.getBillDetail5_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Mame_cate" ColumnName="Mame cate" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="bill_id" ColumnName="bill_id" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="size" ColumnName="size" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getBillDetail6" FunctionName="QLBHModel.Store.getBillDetail6">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLBHModel.getBillDetail6_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="size" ColumnName="size" />
+                <ScalarProperty Name="Mame_cate" ColumnName="Mame cate" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="bill_id" ColumnName="bill_id" />
+                <ScalarProperty Name="total" ColumnName="total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getBillDetailbyBill" FunctionName="QLBHModel.Store.getBillDetailbyBill">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLBHModel.getBillDetailbyBill_Result">
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Name1" ColumnName="Name1" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getBillDetailbyBill1" FunctionName="QLBHModel.Store.getBillDetailbyBill1">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLBHModel.getBillDetailbyBill1_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Mame_cate" ColumnName="Mame cate" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getBillDetailByMaProduct" FunctionName="QLBHModel.Store.getBillDetailByMaProduct">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLBHModel.getBillDetailByMaProduct_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="bill_id" ColumnName="bill_id" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="adminPhone" ColumnName="adminPhone" />
+                <ScalarProperty Name="userPhone" ColumnName="userPhone" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+                <ScalarProperty Name="id1" ColumnName="id1" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="cat_id" ColumnName="cat_id" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="quantity1" ColumnName="quantity1" />
+                <ScalarProperty Name="create_at1" ColumnName="create_at1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getBillDetailtoList" FunctionName="QLBHModel.Store.getBillDetailtoList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLBHModel.getBillDetailtoList_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Mame_cate" ColumnName="Mame cate" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="adminPhone" ColumnName="adminPhone" />
+                <ScalarProperty Name="userPhone" ColumnName="userPhone" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getcat" FunctionName="QLBHModel.Store.getcat">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLBHModel.getcat_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getInfoToEditBillDetail" FunctionName="QLBHModel.Store.getInfoToEditBillDetail">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLBHModel.getInfoToEditBillDetail_Result">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="Name1" ColumnName="Name1" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getInfoToEditBillDetail1" FunctionName="QLBHModel.Store.getInfoToEditBillDetail1">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLBHModel.getInfoToEditBillDetail1_Result">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="NameCate" ColumnName="NameCate" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetInfoToEditBillDetail2" FunctionName="QLBHModel.Store.GetInfoToEditBillDetail2">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLBHModel.GetInfoToEditBillDetail2_Result">
+                <ScalarProperty Name="maHoaDon" ColumnName="maHoaDon" />
+                <ScalarProperty Name="userPhone" ColumnName="userPhone" />
+                <ScalarProperty Name="adminPhone" ColumnName="adminPhone" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getInfoToEditBillDetail3" FunctionName="QLBHModel.Store.getInfoToEditBillDetail3">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLBHModel.getInfoToEditBillDetail3_Result">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="NameCate" ColumnName="NameCate" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getPrice" FunctionName="QLBHModel.Store.getPrice" />
+          <FunctionImportMapping FunctionImportName="getPrice1" FunctionName="QLBHModel.Store.getPrice1">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLBHModel.getPrice1_Result">
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -644,6 +1121,27 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getProductIdQuantity" FunctionName="QLBHModel.Store.getProductIdQuantity">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLBHModel.getProductIdQuantity_Result">
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="ProductQuantity" ColumnName="ProductQuantity" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getProductIdQuantity1" FunctionName="QLBHModel.Store.getProductIdQuantity1">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLBHModel.getProductIdQuantity1_Result">
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="ProductQuantity" ColumnName="ProductQuantity" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getProductQtt" FunctionName="QLBHModel.Store.getProductQtt" />
+          <FunctionImportMapping FunctionImportName="getTotal" FunctionName="QLBHModel.Store.getTotal" />
           <FunctionImportMapping FunctionImportName="searchByCode" FunctionName="QLBHModel.Store.searchByCode">
             <ResultMapping>
               <ComplexTypeMapping TypeName="QLBHModel.searchByCode_Result">
@@ -652,6 +1150,15 @@
                 <ScalarProperty Name="Loai_san_pham" ColumnName="Loai san pham" />
                 <ScalarProperty Name="quantity" ColumnName="quantity" />
                 <ScalarProperty Name="image" ColumnName="image" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="searchCateName" FunctionName="QLBHModel.Store.searchCateName">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLBHModel.searchCateName_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -665,7 +1172,7 @@
                 <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="image" ColumnName="image" />
                 <ScalarProperty Name="quantity" ColumnName="quantity" />
-                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="create_at" ColumnName="create_at" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -679,94 +1186,65 @@
                 <ScalarProperty Name="Loai_san_pham" ColumnName="Loai san pham" />
                 <ScalarProperty Name="quantity" ColumnName="quantity" />
                 <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="type" ColumnName="type" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="getBillDetailbyBill" FunctionName="QLBHModel.Store.getBillDetailbyBill">
+          <FunctionImportMapping FunctionImportName="selectProductcate1" FunctionName="QLBHModel.Store.selectProductcate1">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="QLBHModel.getBillDetailbyBill_Result">
-                <ScalarProperty Name="code" ColumnName="code" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="Name1" ColumnName="Name1" />
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="getBillDetailbyBill1" FunctionName="QLBHModel.Store.getBillDetailbyBill1">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="QLBHModel.getBillDetailbyBill1_Result">
-                <ScalarProperty Name="code" ColumnName="code" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="Mame_cate" ColumnName="Mame cate" />
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="getPrice" FunctionName="QLBHModel.Store.getPrice" />
-          <FunctionImportMapping FunctionImportName="getTotal" FunctionName="QLBHModel.Store.getTotal" />
-          <FunctionImportMapping FunctionImportName="getPrice1" FunctionName="QLBHModel.Store.getPrice1">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="QLBHModel.getPrice1_Result">
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="getInfoToEditBillDetail" FunctionName="QLBHModel.Store.getInfoToEditBillDetail">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="QLBHModel.getInfoToEditBillDetail_Result">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="Name1" ColumnName="Name1" />
-                <ScalarProperty Name="code" ColumnName="code" />
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetInfoToEditBillDetail2" FunctionName="QLBHModel.Store.GetInfoToEditBillDetail2">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="QLBHModel.GetInfoToEditBillDetail2_Result">
-                <ScalarProperty Name="maHoaDon" ColumnName="maHoaDon" />
-                <ScalarProperty Name="userPhone" ColumnName="userPhone" />
-                <ScalarProperty Name="adminPhone" ColumnName="adminPhone" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="getInfoToEditBillDetail1" FunctionName="QLBHModel.Store.getInfoToEditBillDetail1">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="QLBHModel.getInfoToEditBillDetail1_Result">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="Name1" ColumnName="Name1" />
-                <ScalarProperty Name="code" ColumnName="code" />
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="getInfoToEditBillDetail3" FunctionName="QLBHModel.Store.getInfoToEditBillDetail3">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="QLBHModel.getInfoToEditBillDetail3_Result">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="NameCate" ColumnName="NameCate" />
-                <ScalarProperty Name="code" ColumnName="code" />
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="getBillDetail" FunctionName="QLBHModel.Store.getBillDetail">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="QLBHModel.getBillDetail_Result">
+              <ComplexTypeMapping TypeName="QLBHModel.selectProductcate1_Result">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="code" ColumnName="code" />
                 <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="Mame_cate" ColumnName="Mame cate" />
                 <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="Loai_san_pham" ColumnName="Loai san pham" />
                 <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="size" ColumnName="size" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="selectProductcate2" FunctionName="QLBHModel.Store.selectProductcate2">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLBHModel.selectProductcate2_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="Loai_san_pham" ColumnName="Loai san pham" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="size" ColumnName="size" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="selectProductSearch" FunctionName="QLBHModel.Store.selectProductSearch">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLBHModel.selectProductSearch_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="Loai_san_pham" ColumnName="Loai san pham" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="size" ColumnName="size" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getProductByCodec" FunctionName="QLBHModel.Store.getProductByCodec">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLBHModel.getProductByCodec_Result">
+                <ScalarProperty Name="Id_sản_phẩm" ColumnName="Id sản phẩm" />
+                <ScalarProperty Name="Tên_sản_phẩm" ColumnName="Tên sản phẩm" />
+                <ScalarProperty Name="Giá_sản_phẩm" ColumnName="Giá sản phẩm" />
+                <ScalarProperty Name="Mã_sản_phẩm" ColumnName="Mã sản phẩm" />
+                <ScalarProperty Name="Tên_danh_mục" ColumnName="Tên danh mục" />
+                <ScalarProperty Name="Ảnh_sản_phẩm" ColumnName="Ảnh sản phẩm" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

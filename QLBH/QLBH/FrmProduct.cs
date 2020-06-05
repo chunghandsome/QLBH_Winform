@@ -21,8 +21,9 @@ namespace QLBH
         public FrmProduct()
         {
             InitializeComponent();
-            cboCate.DropDownHeight = 30;
+            cboCate.DropDownHeight = 150;
             cboCate.Width = 407;
+            cboCate.Height = 35;
         }
 
         private void comboBoxCate_SelectedIndexChanged(object sender, EventArgs e)
@@ -36,10 +37,17 @@ namespace QLBH
         }
         private void autoLoad()
         {
-            var product = db.selectProductcate().ToList();
+            var product = db.selectProductcate2().ToList();
             listProduct.DataSource = product;
-  
-            
+            listProduct.Columns[0].HeaderText = "Id sản phẩm";
+            listProduct.Columns[1].HeaderText = "Mã sản phẩm";
+            listProduct.Columns[2].HeaderText = "Tên sản phẩm";
+            listProduct.Columns[3].HeaderText = "Giá sản phẩm";
+            listProduct.Columns[4].HeaderText = "Loại sản phẩm";
+            listProduct.Columns[5].HeaderText = "Số lượng sản phẩm";
+            listProduct.Columns[6].HeaderText = "Ảnh sản phẩm";
+           listProduct.Columns[7].HeaderText = "Màu sắc";
+           listProduct.Columns[8].HeaderText = "Kích cỡ";
         }
         private void FrmProduct_Load(object sender, EventArgs e)
         {
@@ -57,30 +65,57 @@ namespace QLBH
             cboColor.ValueMember = "id";
             cboColor.DataSource = color;
         }
+        private  Boolean validate()
+        {
+            if (txtName.Text == null | txtCode.Text == null | txtPrice.Text == null | txtQuantity.Text  == null | cboCate.Text == null | cboSize.Text == null | cboColor.Text == null)
+            {
 
+                return false;
+            }else if(txtImage.Text == null)
+            {
+                return false;
+            }
+                return true;
+
+        }
         private void btnAdd_Click(object sender, EventArgs e)
         {
-               Category cat = cboCate.SelectedItem as Category;
-               int CatId = cat.id;
-                Attribute a = cboColor.SelectedItem as Attribute;
-               int attrColorId  =  a.id;
-                Attribute b = cboSize.SelectedItem as Attribute;
-               int attrSizeId = b.id;
-            try
-            { Product p = new Product { name = txtName.Text, cat_id = CatId, code = txtCode.Text, price = Convert.ToDouble(txtPrice.Text), image = txtImage.Text, quantity = Convert.ToInt32(txtQuantity.Text) };
-                db.Products.Add(p);
-                db.SaveChanges();
-                autoLoad();
-                db.productAttrs.Add(new productAttr { product_id = p.id, attr_id = attrSizeId });
-                db.productAttrs.Add(new productAttr { product_id = p.id, attr_id = attrColorId });
-               db.SaveChanges();
-                File.Copy(txtImage.Text, Path.Combine(@"C:\Users\Chung Dep Trai\Desktop\QLBH\QLBH\QLBH\Images", Path.GetFileName(txtImage.Text)), true);
-                MessageBox.Show("thêm thành công");
-            }
-            catch(Exception ex)
+            if (validate())
             {
-                MessageBox.Show(ex.Message);
+                Category cat = cboCate.SelectedItem as Category;
+                int CatId = cat.id;
+                Attribute a = cboColor.SelectedItem as Attribute;
+                int attrColorId = a.id;
+                Attribute b = cboSize.SelectedItem as Attribute;
+                int attrSizeId = b.id;
+                try
+                {
+                    var checkProd = db.Products.Where(x => x.code == txtCode.Text).ToList();
+                    if(checkProd.Count() <= 0)
+                    {
+                        Product p = new Product { name = txtName.Text, cat_id = CatId, code = txtCode.Text, price = Convert.ToDouble(txtPrice.Text), image = txtImage.Text, quantity = Convert.ToInt32(txtQuantity.Text), create_at = DateTime.Now };
+                        db.Products.Add(p);
+                        db.productAttrs.Add(new productAttr { product_id = p.id, attr_id = attrSizeId });
+                        db.productAttrs.Add(new productAttr { product_id = p.id, attr_id = attrColorId });
+                        db.SaveChanges();
+                        autoLoad();
+                        File.Copy(txtImage.Text, Path.Combine(@"C:\Users\Chung Dep Trai\Desktop\QLBH\QLBH\QLBH\Images", Path.GetFileName(txtImage.Text)), true);
+                        MessageBox.Show("thêm thành công");
+                    }else
+                    {
+                        MessageBox.Show("Mã sản phẩm đã tồn tại, hãy cập nhập số lượng sản phẩm của mã này");
+                    }
+                   
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Dữ liệu chưa đúng định dạng!");
+                }
+            }else
+            {
+                MessageBox.Show("Dữ liệu chưa đúng định dạng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+              
         }
 
         private void listProduct_DataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -126,6 +161,8 @@ namespace QLBH
                 var catId = db.Categories.Where(x => x.Name == catName).Select(x => x).First();
                 cboCate.SelectedItem = selectedRow.Cells[4].Value.ToString();
                 cboCate.SelectedValue = catId.id;
+
+                pictureBox1.ImageLocation = image;
             }
             else
             {
@@ -190,38 +227,80 @@ namespace QLBH
             }
             else
             {
-                MessageBox.Show("Chon truoc khi sua");
+                MessageBox.Show("Chọn sản phẩm trước khi sửa!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (listProduct.SelectedRows != null)
+            try
             {
-                if (MessageBox.Show("Bạn có muốn xóa không?", "Thông báo",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+
+                if (listProduct.SelectedRows != null)
                 {
-                    Byte i = Convert.ToByte(id);
-                    Product p = db.Products.FirstOrDefault(a => a.id.Equals(i));
-                    var pa = (from c in db.productAttrs
-                                   where c.product_id  == i
-                                   select c);
-                    db.Products.Remove(p);
-                    db.productAttrs.RemoveRange(pa);
-                    var file = image;
-                    using (var s = new FileStream(file, System.IO.FileMode.Open))
+                    if (MessageBox.Show("Bạn có muốn xóa không?", "Thông báo",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        pictureBox1.Image = Image.FromStream(s);
+                        Byte i = Convert.ToByte(id);
+                        Product p = db.Products.FirstOrDefault(a => a.id.Equals(i));
+
+                        var prod = db.BillDetails.Where(x => x.product_id == i).Select(x => x).ToList();
+                        if (prod.Count() <= 0)
+                        {
+                            var pa = (from c in db.productAttrs
+                                      where c.product_id == i
+                                      select c);
+                            db.Products.Remove(p);
+                            db.productAttrs.RemoveRange(pa);
+                            var file = image;
+                            pictureBox1.Image.Dispose();
+                            pictureBox1.Image = null;
+                            using (var s = new FileStream(file, System.IO.FileMode.Open))
+                            {
+                                pictureBox1.Image = Image.FromStream(s);
+                            }
+                            System.IO.File.Delete(file);
+                            db.SaveChanges();
+                            autoLoad();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Bạn không thể xóa sản phẩm này", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+
                     }
-                    System.IO.File.Delete(file);
-                    db.SaveChanges();
-                    autoLoad();
                 }
+                else
+                {
+                    MessageBox.Show("Mời bạn chọn sản phẩm trước khi xóa","Thông báo",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                }
+            }catch( Exception ex)
+            {
+                MessageBox.Show("Bạn không thể xóa sản phẩm này", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtMaSearch.Text))
+            {
+                autoLoad();
             }
             else
             {
-                MessageBox.Show("Chon truoc khi xoa");
+                var result = db.selectProductSearch(txtMaSearch.Text);
+                listProduct.DataSource = result;
             }
+        }
+
+        private void tableLayoutPanel4_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel5_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

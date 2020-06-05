@@ -20,5 +20,7 @@ namespace QLBH
         public string Loai_san_pham { get; set; }
         public Nullable<int> quantity { get; set; }
         public string image { get; set; }
+        public string value { get; set; }
+        public Nullable<byte> type { get; set; }
     }
 }

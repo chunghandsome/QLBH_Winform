@@ -21,8 +21,11 @@ namespace QLBH
 
         private void autoLoad()
         {
-            var r = db.Attributes.Select(x => x).ToList();
+            var r = db.getAttr().ToList();
             dataAttr.DataSource = r;
+            dataAttr.Columns[0].HeaderText = "Mã thuộc tính";
+            dataAttr.Columns[1].HeaderText = "Giá trị thuộc tính";
+            dataAttr.Columns[2].HeaderText = "Kiểu thuộc tính";
         }
         private void frmAttrbute_Load(object sender, EventArgs e)
         {
@@ -41,10 +44,10 @@ namespace QLBH
         {
             try
             {
-               byte t = 0;
+               byte t = 1;
                 if (selectType.SelectedItem.ToString() == "Color")
                 {
-                    t = 1;
+                    t = 0;
                 }
                 db.Attributes.Add(new Attribute { type = t, value = txtValue.Text });
                 db.SaveChanges();
@@ -109,9 +112,17 @@ namespace QLBH
                 {
                     Byte i = Convert.ToByte(id);
                     Attribute attr = db.Attributes.FirstOrDefault(a => a.id.Equals(i));
-                    db.Attributes.Remove(attr);
-                    db.SaveChanges();
-                    autoLoad();
+                    var p = db.productAttrs.Where(x => x.attr_id == i).Select(x => x).ToList();
+                    if( p.Count() <= 0)
+                    {
+                        db.Attributes.Remove(attr);
+                        db.SaveChanges();
+                        autoLoad();
+                    }else
+                    {
+                        MessageBox.Show("Bạn không thể xóa Thuộc tính này ");
+                    }
+                   
                 }
             }else
             {

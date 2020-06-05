@@ -16,8 +16,12 @@ namespace QLBH
         public int id { get; set; }
         public string code { get; set; }
         public string name { get; set; }
+        public string value { get; set; }
         public string Mame_cate { get; set; }
         public Nullable<double> price { get; set; }
         public int quantity { get; set; }
+        public Nullable<int> bill_id { get; set; }
+        public Nullable<double> total { get; set; }
+        public Nullable<byte> type { get; set; }
     }
 }

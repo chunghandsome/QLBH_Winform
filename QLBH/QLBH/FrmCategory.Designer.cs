@@ -38,7 +38,10 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.text = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.listCate = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtSearch = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -91,7 +94,7 @@
             this.tableLayoutPanel4.Controls.Add(this.btnOut, 3, 0);
             this.tableLayoutPanel4.Controls.Add(this.btnDelete, 2, 0);
             this.tableLayoutPanel4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(21, 196);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(21, 232);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -105,7 +108,7 @@
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(144, 35);
             this.btnAdd.TabIndex = 3;
-            this.btnAdd.Text = "Thêm sản phẩm";
+            this.btnAdd.Text = "Thêm mới";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
@@ -153,18 +156,22 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Controls.Add(this.text, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.txtName, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnSearch, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.txtSearch, 1, 1);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(21, 129);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(774, 38);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(774, 80);
             this.tableLayoutPanel1.TabIndex = 26;
             // 
             // text
             // 
             this.text.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.text.AutoSize = true;
-            this.text.Location = new System.Drawing.Point(3, 12);
+            this.text.Location = new System.Drawing.Point(3, 13);
             this.text.Name = "text";
             this.text.Size = new System.Drawing.Size(76, 13);
             this.text.TabIndex = 0;
@@ -178,8 +185,18 @@
             this.txtName.Location = new System.Drawing.Point(157, 3);
             this.txtName.Multiline = true;
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(303, 32);
+            this.txtName.Size = new System.Drawing.Size(303, 33);
             this.txtName.TabIndex = 1;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(466, 42);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(75, 35);
+            this.btnSearch.TabIndex = 2;
+            this.btnSearch.Text = "Tìm kiếm";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.txtSearch_Click);
             // 
             // listCate
             // 
@@ -189,12 +206,30 @@
             this.listCate.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.listCate.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.listCate.GridColor = System.Drawing.SystemColors.ButtonFace;
-            this.listCate.Location = new System.Drawing.Point(21, 278);
+            this.listCate.Location = new System.Drawing.Point(21, 319);
             this.listCate.Name = "listCate";
-            this.listCate.Size = new System.Drawing.Size(774, 225);
+            this.listCate.Size = new System.Drawing.Size(774, 160);
             this.listCate.TabIndex = 27;
             this.listCate.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.listCate_CellClick);
             this.listCate.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.listCate_DataError);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 53);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(141, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Tìm kiếm theo tên danh mục";
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(157, 42);
+            this.txtSearch.Multiline = true;
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(303, 35);
+            this.txtSearch.TabIndex = 4;
             // 
             // FrmCategory
             // 
@@ -232,5 +267,8 @@
         private System.Windows.Forms.Label text;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.DataGridView listCate;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtSearch;
     }
 }

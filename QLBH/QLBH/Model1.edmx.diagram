@@ -4,19 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9069e6c6af154876ace5a625f0a3cd89" Name="Diagram1">
-        <EntityTypeShape EntityType="QLBHModel.Attribute" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLBHModel.Bill" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLBHModel.BillDetail" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLBHModel.Category" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLBHModel.Product" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLBHModel.productAttr" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLBHModel.User" Width="1.5" PointX="5.75" PointY="7" IsExpanded="true" />
-        <AssociationConnector Association="QLBHModel.FK__productAt__attr___4AB81AF0" ManuallyRouted="false" />
-        <AssociationConnector Association="QLBHModel.FK__BillDetai__bill___6E01572D" ManuallyRouted="false" />
-        <AssociationConnector Association="QLBHModel.FK__BillDetai__produ__6D0D32F4" ManuallyRouted="false" />
-        <AssociationConnector Association="QLBHModel.FK__Product__cat_id__15502E78" ManuallyRouted="false" />
-        <AssociationConnector Association="QLBHModel.FK__productAt__produ__49C3F6B7" ManuallyRouted="false" />
+      <Diagram DiagramId="617a8d95288f464b96195693345fca7f" Name="Diagram1">
+        <EntityTypeShape EntityType="QLBHModel.Attribute" Width="1.5" PointX="6" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBHModel.Bill" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBHModel.BillDetail" Width="1.5" PointX="5.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBHModel.Category" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBHModel.Product" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBHModel.productAttr" Width="1.5" PointX="8.25" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLBHModel.User" Width="1.5" PointX="8.75" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="QLBHModel.FK__productAt__attr___69FBBC1F" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBHModel.FK__BillDetai__bill___5F7E2DAC" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBHModel.FK__BillDetai__produ__607251E5" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBHModel.FK__Product__cat_id__6166761E" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBHModel.FK__Product__cat_id__6AEFE058" ManuallyRouted="false" />
+        <AssociationConnector Association="QLBHModel.FK__productAt__produ__6BE40491" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

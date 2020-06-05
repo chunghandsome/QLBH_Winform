@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QLBH.DatabseService;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,7 +13,7 @@ namespace QLBH
 {
     public partial class FrmLogin : Form
     {
-        QLBHEntities2 db = new QLBHEntities2();
+        QLBHEntities2 db = Database.db;
         public FrmLogin()
         {
             InitializeComponent();
@@ -20,10 +21,10 @@ namespace QLBH
         void Login(string email, string password)
         {
           
-            var result = db.Users.Where(x => x.email == email && x.password == password).ToList();
+            var result = db.Users.Where(x => x.email == email && x.password == password && x.role == 1).ToList();
             if (result.Count() > 0)
             {
-                FrmMain m = new FrmMain();
+                FrmMain m = new FrmMain(email);
                 this.Hide();
                 m.ShowDialog();
                 this.Show();
@@ -42,6 +43,7 @@ namespace QLBH
 
         private void button1_Click(object sender, EventArgs e)
         {
+           
             Login(tk.Text, pass.Text);
         }
 

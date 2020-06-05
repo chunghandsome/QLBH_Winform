@@ -37,10 +37,25 @@ namespace QLBH
         {
             try
             {
-                db.Users.Add(new User { name = txtName.Text , email = txtEmail.Text , phone = txtPhone.Text , password = txtPassword.Text ,role = Convert.ToByte(checkAdmin.Checked) });
-                db.SaveChanges();
-                MessageBox.Show("Thêm thành công!", "Thêm mới");
-                autoLoad();
+                if (!string.IsNullOrEmpty(txtPhone.Text) | !string.IsNullOrEmpty(txtName.Text) | !string.IsNullOrEmpty(txtPassword.Text))
+                {
+                    var u = db.Users.Where(x => x.phone == txtPhone.Text).ToList();
+                   
+                    if (u.Count() <= 0)
+                    {
+                        db.Users.Add(new User { name = txtName.Text, email = txtEmail.Text, phone = txtPhone.Text, password = txtPassword.Text, role = Convert.ToByte(checkAdmin.Checked) });
+                        db.SaveChanges();
+                        MessageBox.Show("Thêm thành công!", "Thêm mới");
+                        autoLoad();
+                    }else
+                    {
+                        MessageBox.Show("Ma khach hang da ton tai");
+                    }
+                }else
+                {
+                    MessageBox.Show("Nhập trước khi thêm");
+                }
+                                              
             }
             catch (Exception ex)
             {
@@ -99,20 +114,46 @@ namespace QLBH
 
             if (dataUser.SelectedRows != null)
             {
+                
                 if (MessageBox.Show("Bạn có muốn xóa không?", "Thông báo",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     Byte i = Convert.ToByte(id);
                     User attr = db.Users.FirstOrDefault(a => a.id.Equals(i));
-                    db.Users.Remove(attr);
-                    db.SaveChanges();
-                    autoLoad();
+                   if( attr.role == 0)
+                    {
+                        db.Users.Remove(attr);
+                        db.SaveChanges();
+                        autoLoad();
+                    }else
+                    {
+                        MessageBox.Show("Ban khong duoc phep xoa ");
+                    }
+                   
                 }
             }
             else
             {
                 MessageBox.Show("Chon truoc khi xoa");
             }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtPhoneSearch.Text))
+            {
+                autoLoad();
+            }
+            else
+            {
+                var result = db.Users.Where(x => x.phone == txtPhoneSearch.Text).Select(x => x).ToList();
+                dataUser.DataSource = result;
+            }
+        }
+
+        private void dataUser_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

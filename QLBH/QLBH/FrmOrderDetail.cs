@@ -13,10 +13,12 @@ namespace QLBH
 {
     public partial class List : Form
     {
-        String id ;
+        String id;
         QLBHEntities2 db = new QLBHEntities2();
-        public List()
+        String email = "";
+        public List(String e)
         {
+            email = e;
             InitializeComponent();
         }
 
@@ -27,10 +29,9 @@ namespace QLBH
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-          
-            int s = Convert.ToInt32(txtSearch.Text);
-            var result = db.getProductByCode(s).ToList();
-            if(result.Count > 0)
+
+            var result = db.getProductByCodec(txtSearch.Text).ToList();
+            if (result.Count > 0)
             {
                 var attr = db.getAttrByProductId(result[0].Id_sản_phẩm).ToList();
                 if (result != null)
@@ -54,22 +55,34 @@ namespace QLBH
 
                 }
             }
-            
+
             else
             {
                 MessageBox.Show("Mã sản phẩm không tồn tai");
             }
-            
+
         }
-        private void autoLoad()
+        private void autoLoad(int BillId)
         {
-           
+            var order = db.getBillDetail6(BillId).ToList();
+            listOrder.DataSource = order;
+            listOrder.Columns[0].HeaderText = "Id sản phẩm";
+            listOrder.Columns[1].HeaderText = "Mã sản phẩm";
+            listOrder.Columns[2].HeaderText = "Tên sản phẩm";
+            listOrder.Columns[3].HeaderText = "Mau sac";
+            listOrder.Columns[4].HeaderText = "Kich co";
+            listOrder.Columns[5].HeaderText = "Loai sản phẩm";
+            listOrder.Columns[6].HeaderText = "Giá sản phẩm";
+            listOrder.Columns[7].HeaderText = "So luong sản phẩm";
+            listOrder.Columns[8].HeaderText = "Ma hoa don";
+            listOrder.Columns[9].HeaderText = "Tong tien";
+
         }
         private double total(int ids)
         {
             var getPrice = db.getPrice1(ids).ToList();
             Double t = 0;
-            foreach ( getPrice1_Result p in getPrice)
+            foreach (getPrice1_Result p in getPrice)
             {
                 t += Convert.ToDouble(p.price * p.quantity);
             }
@@ -78,10 +91,9 @@ namespace QLBH
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
-         //  try
-         //   {
-                int s = Convert.ToInt32(txtSearch.Text);
-                var result = db.getProductByCode(s).ToList();
+            try
+            {
+                var result = db.getProductByCodec(txtSearch.Text).ToList();
                 var quantity = db.Products.Where(x => x.code == txtSearch.Text).Select(x => x.quantity).First();
                 if (quantity > 0 && quantity >= Convert.ToInt32(txtQuantity.Text))
                 {
@@ -91,7 +103,7 @@ namespace QLBH
                         var maHD = db.Bills.Where(x => x.maHoaDon == txtMaHoaDon.Text).Select(x => x).ToList();
                         if (maHD.Count() == 0)
                         {
-                            var bill = new Bill { userPhone = txtSdtKhach.Text, adminPhone = comMaNv.SelectedItem.ToString(), maHoaDon = txtMaHoaDon.Text };
+                            var bill = new Bill { userPhone = txtSdtKhach.Text, adminPhone = txtSdtNv.Text, maHoaDon = txtMaHoaDon.Text, create_at = DateTime.Now };
                             db.Bills.Add(bill);
                             db.SaveChanges();
                             ids = bill.id;
@@ -100,34 +112,30 @@ namespace QLBH
                         {
                             ids = maHD[0].id;
                         }
-
                         int q = Convert.ToInt32(txtQuantity.Text);
-                        db.BillDetails.Add(new BillDetail { product_id = result[0].Id_sản_phẩm, bill_id = ids, quantity = q });
+                        Double tt = Convert.ToDouble(result[0].Giá_sản_phẩm * q);
+                        db.BillDetails.Add(new BillDetail { product_id = result[0].Id_sản_phẩm, bill_id = ids, quantity = q, total = tt, userPhone = txtSdtKhach.Text, adminPhone = txtSdtNv.Text, create_at = DateTime.Now });
                         db.SaveChanges();
-                     //  Product ps = db.Products.FirstOrDefault(at => at.id == ids);
-                     //   int z = Convert.ToByte(quantity - Convert.ToInt32(txtQuantity.Text));
-                      //  MessageBox.Show(z.ToString());
-                      //  ps.quantity = z;
-                      //  db.SaveChanges();
-                    var a = db.getBillDetail(ids);
-                        listOrder.DataSource = a;
+                        autoLoad(ids);
                         txtTotal.Text = total(ids).ToString();
                         MessageBox.Show("Thêm thành công!", "Thêm mới");
                     }
-                }else
+                }
+                else
                 {
                     MessageBox.Show("Sản phẩm đã hết hàng hoặc số lượng không đủ");
                 }
-                
-          //  }catch(Exception ex)
-         //  {
-        //        MessageBox.Show(ex.Message);
-         //   }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
 
 
         }
-       
+
         private void tableLayoutPanel4_Paint(object sender, PaintEventArgs e)
         {
 
@@ -135,10 +143,13 @@ namespace QLBH
 
         private void txtMaNv_Load(object sender, EventArgs e)
         {
-            var admin = db.Users.Where(x => x.role == 0).Select(x => x.name).ToList();
-            comMaNv.DataSource = admin;
+            String em = email.ToString();
+
+            var admin = db.Users.Where(x => x.email == em).Select(x => x).ToList();
+            txtSdtNv.Text = em;
+            txtTenNv.Text = admin[0].name;
             txtMaHoaDon.Text = CreateKey("HDB");
-           
+
         }
         public static string CreateKey(string tiento)
         {
@@ -214,7 +225,8 @@ namespace QLBH
             if (user.Count() > 0)
             {
                 txtTenKhach.Text = user[0];
-            }else
+            }
+            else
             {
                 MessageBox.Show("Khach hang chua dang ki the thanh vien");
             }
@@ -222,7 +234,7 @@ namespace QLBH
 
         private void comMaNv_SelectedIndexChanged(object sender, EventArgs e)
         {
-          
+
         }
 
         private void comMaNv_SelectedIndexChanged_1(object sender, EventArgs e)
@@ -230,7 +242,7 @@ namespace QLBH
             ComboBox cmb = (ComboBox)sender;
             String phone = cmb.SelectedValue.ToString();
             var user = db.Users.Where(x => x.phone == phone).Select(x => x.name).ToList();
-            if(user.Count() > 0)
+            if (user.Count() > 0)
             {
                 txtTenNv.Text = user[0];
             }
@@ -238,20 +250,35 @@ namespace QLBH
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (listOrder.SelectedRows != null)
+            if (listOrder.SelectedCells.Count > 0)
             {
                 Byte i = Convert.ToByte(id);
                 BillDetail biD = db.BillDetails.FirstOrDefault(att => att.id.Equals(i));
-                biD.quantity = Convert.ToInt32(txtQuantity.Text);
-                Bill bil = db.Bills.FirstOrDefault(att => att.id.Equals(i));
+                var qttProd = db.getProductQtt(i).First();
+                int quan = Convert.ToInt32(txtQuantity.Text);
+                if (qttProd >= quan)
+                {
+                    biD.quantity = quan;
+                    biD.userPhone = txtSdtKhach.Text;
+                    biD.quantity = Convert.ToInt32(txtQuantity.Text);
+                    Double to = Convert.ToInt32(txtPrice.Text) * Convert.ToInt32(txtQuantity.Text);
+                    biD.total = to;
+                    db.SaveChanges();
+                    var bill = db.BillDetails.Where(x => x.id == i).Select(x => x.bill_id).First();
+                    int bi = (int)bill;
+                    autoLoad(bi);
+                    txtTotal.Text = total(bi).ToString();
 
-                db.SaveChanges();
+                }
+                else
+                {
+                    MessageBox.Show("Số lượng sản phẩm không đủ!","Thông báo",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                }
 
-                autoLoad();
             }
             else
             {
-                MessageBox.Show("Chon truoc khi sua");
+                MessageBox.Show("Bạn chọn sản phẩm trước khi sửa!","Thông báo",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
         }
 
@@ -261,19 +288,73 @@ namespace QLBH
             DataGridViewRow selectedRow = listOrder.Rows[index];
             id = selectedRow.Cells[0].Value.ToString();
             int i = Convert.ToInt32(id);
-            MessageBox.Show(i.ToString());
-            var info = db.getInfoToEditBillDetail3(i).First();
-            var info2 = db.GetInfoToEditBillDetail2(i).First();
-            txtName.Text = info.name;
-            txtPrice.Text = info.price.ToString();
-            txtCate.Text = info.NameCate;
-            txtQuantity.Text = info.quantity.ToString();
-            comMaNv.SelectedItem = info2.adminPhone;
-            txtSdtKhach.Text = info2.userPhone;
-            txtMaHoaDon.Text = info2.maHoaDon;
-
+            var BillId = db.BillDetails.Where(x => x.id == i).Select(x => x.bill_id).First();
+            var info = db.getBillDetailtoList(BillId).First();
+            txtName.Text = selectedRow.Cells[2].Value.ToString();
+            txtPrice.Text = selectedRow.Cells[6].Value.ToString();
+            txtCate.Text = selectedRow.Cells[5].Value.ToString();
+            txtQuantity.Text = selectedRow.Cells[7].Value.ToString();
+            txtSdtKhach.Text = info.userPhone;
+            txtColor.Text = selectedRow.Cells[3].Value.ToString();
+            txtSize.Text = selectedRow.Cells[4].Value.ToString();
         }
 
-      
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (listOrder.SelectedRows != null)
+            {
+                if (MessageBox.Show("Bạn có muốn xóa không?", "Thông báo",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    Byte i = Convert.ToByte(id);
+                    var bills = db.BillDetails.Where(x => x.id == i).Select(x => x).First();
+                    int BillId = Convert.ToInt32(bills.bill_id);
+                    var billTotal = db.BillDetails.Where(x => x.bill_id == BillId).ToList();
+                    BillDetail b = db.BillDetails.FirstOrDefault(a => a.id.Equals(i));
+                    db.BillDetails.Remove(b);
+
+                    if (billTotal.Count == 0)
+                    {
+                        Bill bi = db.Bills.FirstOrDefault(a => a.id.Equals(BillId));
+                        db.Bills.Remove(bi);
+                        db.SaveChanges();
+                    }
+                    db.SaveChanges();
+                    //  listOrder.DataSource = db.getBillDetail(BillId);
+
+                    autoLoad(BillId);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Chon truoc khi xoa");
+            }
+        }
+        private void btnThanhToan_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Bill ps = db.Bills.FirstOrDefault(at => at.maHoaDon == txtMaHoaDon.Text);
+                Double t = Convert.ToDouble(txtTotal.Text);
+                ps.total = t;
+
+                var ProductIdQunatity = db.getProductIdQuantity1(txtMaHoaDon.Text).ToList();
+                foreach (getProductIdQuantity1_Result p in ProductIdQunatity)
+                {
+                    var id = p.product_id;
+                    Product prr = db.Products.FirstOrDefault(at => at.id == id);
+                    var quant = p.ProductQuantity - p.quantity;
+                    prr.quantity = quant;
+                    db.SaveChanges();
+                }
+                MessageBox.Show("Thanh toán thành công!","Thông báo",MessageBoxButtons.OK,MessageBoxIcon.None);
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Bạn không thể thanh toán","Thông báo",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
+
+        }
     }
 }

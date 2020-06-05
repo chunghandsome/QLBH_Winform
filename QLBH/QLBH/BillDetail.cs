@@ -17,8 +17,11 @@ namespace QLBH
         public int id { get; set; }
         public Nullable<int> product_id { get; set; }
         public Nullable<int> bill_id { get; set; }
-        public byte[] created_at { get; set; }
         public int quantity { get; set; }
+        public Nullable<double> total { get; set; }
+        public string adminPhone { get; set; }
+        public string userPhone { get; set; }
+        public Nullable<System.DateTime> create_at { get; set; }
     
         public virtual Bill Bill { get; set; }
         public virtual Product Product { get; set; }

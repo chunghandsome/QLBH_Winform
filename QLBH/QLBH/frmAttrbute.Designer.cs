@@ -104,6 +104,7 @@
             this.tableLayoutPanel1.Controls.Add(this.btnPassword, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.txtValue, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.selectType, 1, 0);
+            this.tableLayoutPanel1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tableLayoutPanel1.Location = new System.Drawing.Point(35, 133);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
@@ -115,9 +116,9 @@
             // 
             this.btnName.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.btnName.AutoSize = true;
-            this.btnName.Location = new System.Drawing.Point(3, 12);
+            this.btnName.Location = new System.Drawing.Point(3, 9);
             this.btnName.Name = "btnName";
-            this.btnName.Size = new System.Drawing.Size(31, 13);
+            this.btnName.Size = new System.Drawing.Size(39, 19);
             this.btnName.TabIndex = 0;
             this.btnName.Text = "Type";
             // 
@@ -125,9 +126,9 @@
             // 
             this.btnPassword.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.btnPassword.AutoSize = true;
-            this.btnPassword.Location = new System.Drawing.Point(389, 12);
+            this.btnPassword.Location = new System.Drawing.Point(389, 9);
             this.btnPassword.Name = "btnPassword";
-            this.btnPassword.Size = new System.Drawing.Size(34, 13);
+            this.btnPassword.Size = new System.Drawing.Size(42, 19);
             this.btnPassword.TabIndex = 0;
             this.btnPassword.Text = "Value";
             // 
@@ -150,7 +151,7 @@
             "Size"});
             this.selectType.Location = new System.Drawing.Point(80, 3);
             this.selectType.Name = "selectType";
-            this.selectType.Size = new System.Drawing.Size(303, 21);
+            this.selectType.Size = new System.Drawing.Size(303, 27);
             this.selectType.TabIndex = 2;
             // 
             // tableLayoutPanel4
@@ -182,7 +183,7 @@
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(144, 35);
             this.btnAdd.TabIndex = 3;
-            this.btnAdd.Text = "Thêm sản phẩm";
+            this.btnAdd.Text = "Thêm thuộc tính";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
@@ -256,5 +257,6 @@
         private System.Windows.Forms.Button btnOut;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.ComboBox selectType;
+        
     }
 }
